@@ -1,0 +1,190 @@
+--1
+SQL> SELECT E.ENAME,E.DEPTNO,M.ENAME,M.DEPTNO
+  2  FROM EMP E,EMP M
+  3  WHERE E.MGR =M.EMPNO AND E.JOB='CLERK';
+
+ENAME          DEPTNO ENAME          DEPTNO                                                                                                                                                             
+---------- ---------- ---------- ----------                                                                                                                                                             
+SMITH              20 FORD               20                                                                                                                                                             
+ADAMS              20 SCOTT              20                                                                                                                                                             
+JAMES              30 BLAKE              30                                                                                                                                                             
+MILLER             10 CLARK              10                                                                                                                                                             
+
+SQL> --2
+SQL> SELECT E.ENAME, E.DEPTNO, M.JOB
+  2  FROM EMP E, EMP M
+  3  WHERE E.MGR = M.EMPNO AND M.DEPTNO IN (10, 20);
+
+ENAME          DEPTNO JOB                                                                                                                                                                               
+---------- ---------- ---------                                                                                                                                                                         
+SMITH              20 ANALYST                                                                                                                                                                           
+JONES              20 PRESIDENT                                                                                                                                                                         
+BLAKE              30 PRESIDENT                                                                                                                                                                         
+CLARK              10 PRESIDENT                                                                                                                                                                         
+SCOTT              20 MANAGER                                                                                                                                                                           
+ADAMS              20 ANALYST                                                                                                                                                                           
+FORD               20 MANAGER                                                                                                                                                                           
+MILLER             10 MANAGER                                                                                                                                                                           
+
+8 rows selected.
+
+SQL> --3
+SQL> SELECT E.ENAME, E.DEPTNO, M.ENAME, M.DEPTNO, E.SAL, M.SAL
+  2  FROM EMP E, EMP M
+  3  WHERE E.MGR = M.EMPNO AND E.SAL > 2300 AND M.SAL > 2300;
+
+ENAME          DEPTNO ENAME          DEPTNO        SAL        SAL                                                                                                                                       
+---------- ---------- ---------- ---------- ---------- ----------                                                                                                                                       
+JONES              20 KING               10       2975       5000                                                                                                                                       
+BLAKE              30 KING               10       2850       5000                                                                                                                                       
+CLARK              10 KING               10       2450       5000                                                                                                                                       
+SCOTT              20 JONES              20       3000       2975                                                                                                                                       
+FORD               20 JONES              20       3000       2975                                                                                                                                       
+
+
+
+SQL> --4
+SQL> SELECT E.ENAME, E.DEPTNO, M.ENAME, M.DEPTNO, M.HIREDATE
+  2  FROM EMP E, EMP M
+  3  WHERE E.MGR = M.EMPNO AND E.HIREDATE < '01-JAN-1982';
+
+ENAME          DEPTNO ENAME          DEPTNO HIREDATE                                                                                                                                                    
+---------- ---------- ---------- ---------- ---------                                                                                                                                                   
+SMITH              20 FORD               20 03-DEC-81                                                                                                                                                   
+ALLEN              30 BLAKE              30 01-MAY-81                                                                                                                                                   
+WARD               30 BLAKE              30 01-MAY-81                                                                                                                                                   
+JONES              20 KING               10 17-NOV-81                                                                                                                                                   
+MARTIN             30 BLAKE              30 01-MAY-81                                                                                                                                                   
+BLAKE              30 KING               10 17-NOV-81                                                                                                                                                   
+CLARK              10 KING               10 17-NOV-81                                                                                                                                                   
+TURNER             30 BLAKE              30 01-MAY-81                                                                                                                                                   
+JAMES              30 BLAKE              30 01-MAY-81                                                                                                                                                   
+FORD               20 JONES              20 02-APR-81                                                                                                                                                   
+
+10 rows selected.
+
+SQL> --5
+SQL> -- 5.WAQTD EMP NAME AND MANAGER'S COMM IF EMPLOYEE WORKS AS SALESMAN AND MANAGER WORKS IN DEPT 30
+SQL> SELECT E.ENAME, E.DEPTNO, M.ENAME, M.DEPTNO, M.COMM
+  2  FROM EMP E, EMP M
+  3  WHERE E.MGR = M.EMPNO AND E.JOB = 'SALESMAN' AND M.DEPTNO = 30;
+
+ENAME          DEPTNO ENAME          DEPTNO       COMM                                                                                                                                                  
+---------- ---------- ---------- ---------- ----------                                                                                                                                                  
+ALLEN              30 BLAKE              30                                                                                                                                                             
+WARD               30 BLAKE              30                                                                                                                                                             
+MARTIN             30 BLAKE              30                                                                                                                                                             
+TURNER             30 BLAKE              30                                                                                                                                                             
+
+SQL> --6
+SQL> 
+SQL> SELECT E.ENAME, E.DEPTNO, M.ENAME, M.DEPTNO, E.SAL, M.SAL
+  2  FROM EMP E, EMP M
+  3  WHERE E.MGR = M.EMPNO AND E.SAL > M.SAL;
+
+ENAME          DEPTNO ENAME          DEPTNO        SAL        SAL                                                                                                                                       
+---------- ---------- ---------- ---------- ---------- ----------                                                                                                                                       
+SCOTT              20 JONES              20       3000       2975                                                                                                                                       
+FORD               20 JONES              20       3000       2975                                                                                                                                       
+
+SQL> --7
+SQL> 
+SQL> SELECT E.ENAME, E.DEPTNO, E.HIREDATE, M.ENAME, M.DEPTNO, M.HIREDATE
+  2  FROM EMP E, EMP M
+  3  WHERE E.MGR = M.EMPNO AND M.HIREDATE < E.HIREDATE;
+
+ENAME          DEPTNO HIREDATE  ENAME          DEPTNO HIREDATE                                                                                                                                          
+---------- ---------- --------- ---------- ---------- ---------                                                                                                                                         
+MARTIN             30 28-SEP-81 BLAKE              30 01-MAY-81                                                                                                                                         
+SCOTT              20 19-APR-87 JONES              20 02-APR-81                                                                                                                                         
+TURNER             30 08-SEP-81 BLAKE              30 01-MAY-81                                                                                                                                         
+ADAMS              20 23-MAY-87 SCOTT              20 19-APR-87                                                                                                                                         
+JAMES              30 03-DEC-81 BLAKE              30 01-MAY-81                                                                                                                                         
+FORD               20 03-DEC-81 JONES              20 02-APR-81                                                                                                                                         
+MILLER             10 23-JAN-82 CLARK              10 09-JUN-81                                                                                                                                         
+
+7 rows selected.
+
+SQL> --8
+SQL> 
+SQL> SELECT E.ENAME, E.DEPTNO, M.ENAME, M.DEPTNO, E.JOB
+  2  FROM EMP E, EMP M
+  3  WHERE E.MGR = M.EMPNO AND E.JOB = M.JOB;
+
+no rows selected
+
+SQL> --9
+SQL> 
+SQL> SELECT E.ENAME, E.DEPTNO, M.ENAME, M.DEPTNO
+  2  FROM EMP E, EMP M
+  3  WHERE E.MGR = M.EMPNO AND M.JOB = 'MANAGER';
+
+ENAME          DEPTNO ENAME          DEPTNO                                                                                                                                                             
+---------- ---------- ---------- ----------                                                                                                                                                             
+ALLEN              30 BLAKE              30                                                                                                                                                             
+WARD               30 BLAKE              30                                                                                                                                                             
+MARTIN             30 BLAKE              30                                                                                                                                                             
+SCOTT              20 JONES              20                                                                                                                                                             
+TURNER             30 BLAKE              30                                                                                                                                                             
+JAMES              30 BLAKE              30                                                                                                                                                             
+FORD               20 JONES              20                                                                                                                                                             
+MILLER             10 CLARK              10                                                                                                                                                             
+
+8 rows selected.
+
+SQL> --10
+SQL> 
+SQL> SELECT E.ENAME, E.DEPTNO, M.ENAME, M.DEPTNO, (E.SAL * 12) AS EMP_ANNUAL_SAL, (M.SAL * 12) AS MANAGER_ANNUAL_SAL
+  2  FROM EMP E, EMP M
+  3  WHERE E.MGR = M.EMPNO AND E.DEPTNO IN (10, 20) AND M.SAL > E.SAL;
+
+ENAME          DEPTNO ENAME          DEPTNO EMP_ANNUAL_SAL MANAGER_ANNUAL_SAL                                                                                                                           
+---------- ---------- ---------- ---------- -------------- ------------------                                                                                                                           
+SMITH              20 FORD               20           9600              36000                                                                                                                           
+JONES              20 KING               10          35700              60000                                                                                                                           
+CLARK              10 KING               10          29400              60000                                                                                                                           
+ADAMS              20 SCOTT              20          13200              36000                                                                                                                           
+MILLER             10 CLARK              10          15600              29400                                                                                                                           
+
+SQL> --11
+SQL> 
+SQL> SELECT E.ENAME, E.DEPTNO, M.JOB
+  2  FROM EMP E, EMP M
+  3  WHERE E.MGR = M.EMPNO;
+
+ENAME          DEPTNO JOB                                                                                                                                                                               
+---------- ---------- ---------                                                                                                                                                                         
+SMITH              20 ANALYST                                                                                                                                                                           
+ALLEN              30 MANAGER                                                                                                                                                                           
+WARD               30 MANAGER                                                                                                                                                                           
+JONES              20 PRESIDENT                                                                                                                                                                         
+MARTIN             30 MANAGER                                                                                                                                                                           
+BLAKE              30 PRESIDENT                                                                                                                                                                         
+CLARK              10 PRESIDENT                                                                                                                                                                         
+SCOTT              20 MANAGER                                                                                                                                                                           
+TURNER             30 MANAGER                                                                                                                                                                           
+ADAMS              20 ANALYST                                                                                                                                                                           
+JAMES              30 MANAGER                                                                                                                                                                           
+FORD               20 MANAGER                                                                                                                                                                           
+MILLER             10 MANAGER                                                                                                                                                                           
+
+13 rows selected.
+
+SQL> --12
+SQL> 
+SQL> SELECT E.ENAME, E.DEPTNO, M.ENAME, M.DEPTNO, M.SAL
+  2  FROM EMP E, EMP M
+  3  WHERE E.MGR = M.EMPNO AND M.SAL LIKE '%50';
+
+ENAME          DEPTNO ENAME          DEPTNO        SAL                                                                                                                                                  
+---------- ---------- ---------- ---------- ----------                                                                                                                                                  
+ALLEN              30 BLAKE              30       2850                                                                                                                                                  
+WARD               30 BLAKE              30       2850                                                                                                                                                  
+MARTIN             30 BLAKE              30       2850                                                                                                                                                  
+TURNER             30 BLAKE              30       2850                                                                                                                                                  
+JAMES              30 BLAKE              30       2850                                                                                                                                                  
+MILLER             10 CLARK              10       2450                                                                                                                                                  
+
+6 rows selected.
+
+SQL> SPOOL OFF;

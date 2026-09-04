@@ -1,0 +1,350 @@
+SQL> --1
+SQL> select sum(sal)
+  2  from emp
+  3  group by deptno
+  4  order by deptno;
+
+  SUM(SAL)                                                                      
+----------                                                                      
+      8750                                                                      
+     10875                                                                      
+      9400                                                                      
+
+SQL> --2
+SQL> select avg(sal)
+  2  from emp
+  3  group by job
+  4  order by job;
+
+  AVG(SAL)                                                                      
+----------                                                                      
+      3000                                                                      
+    1037.5                                                                      
+2758.33333                                                                      
+      5000                                                                      
+      1400                                                                      
+
+SQL> --3
+SQL> select deptno,count(*) as emp_count
+  2  from emp
+  3  group by deptno
+  4  having count(*) > 3
+  5  order by deptno;
+
+    DEPTNO  EMP_COUNT                                                           
+---------- ----------                                                           
+        20          5                                                           
+        30          6                                                           
+
+SQL> --4
+SQL> select job,avg(sal)
+  2  from emp
+  3  group by job
+  4  having avg(sal) > 2000
+  5  order by avg(sal) desc;
+
+JOB         AVG(SAL)                                                            
+--------- ----------                                                            
+PRESIDENT       5000                                                            
+ANALYST         3000                                                            
+MANAGER   2758.33333                                                            
+
+SQL> --5
+SQL> select deptno,sum(comm)
+  2  from emp
+  3  where sum(comm) > 500;
+where sum(comm) > 500
+      *
+ERROR at line 3:
+ORA-00934: group function is not allowed here 
+
+
+SQL> ed;
+Wrote file afiedt.buf
+
+  1  select deptno,sum(comm) as total
+  2  from emp
+  3* where total > 500
+SQL> /
+where total > 500
+      *
+ERROR at line 3:
+ORA-00904: "TOTAL": invalid identifier 
+
+
+SQL> --6
+SQL> --5
+SQL> select deptno,sum(comm)
+  2  from emp
+  3  where comm>500;
+select deptno,sum(comm)
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> --5
+SQL> select deptno,sum(comm)
+  2  from emp
+  3  group by deptno
+  4  having sum(comm) >500
+  5  order by deptno;
+
+    DEPTNO  SUM(COMM)                                                           
+---------- ----------                                                           
+        30       2200                                                           
+
+SQL> select max(sal),deptno
+  2  ;
+
+*
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> --6
+SQL> select deptno,max(sal)
+  2  from emp
+  3  group by deptno
+  4  ;
+
+    DEPTNO   MAX(SAL)                                                           
+---------- ----------                                                           
+        30       2850                                                           
+        20       3000                                                           
+        10       5000                                                           
+
+SQL> --7
+SQL> select count(*) as emp_count
+  2  from emp
+  3  order by job;
+
+ EMP_COUNT                                                                      
+----------                                                                      
+        14                                                                      
+
+SQL> select job,count(*)
+  2  from emp
+  3  order by job
+  4  ;
+select job,count(*)
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> select job,count(*)
+  2  from emp
+  3  order by job;
+select job,count(*)
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> select job,count(*) as emp_count
+  2  from emp
+  3  order by job
+  4  group by job;
+group by job
+*
+ERROR at line 4:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> ed;
+Wrote file afiedt.buf
+
+  1  select job,count(*) as emp_count
+  2  from emp
+  3  group by job
+  4* order by job
+SQL> /
+
+JOB        EMP_COUNT                                                            
+--------- ----------                                                            
+ANALYST            2                                                            
+CLERK              4                                                            
+MANAGER            3                                                            
+PRESIDENT          1                                                            
+SALESMAN           4                                                            
+
+SQL> --8
+SQL> select sum(sal)
+  2  from emp
+  3  where job='manager';
+
+  SUM(SAL)                                                                      
+----------                                                                      
+                                                                                
+
+SQL> select mgr,sum(sal)
+  2  from emp
+  3  where mgr is not null
+  4  group by job
+  5  order by job;
+select mgr,sum(sal)
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> ed;
+Wrote file afiedt.buf
+
+  1  select mgr,sum(sal)
+  2  from emp
+  3  where mgr is not null
+  4  group by mgr
+  5* order by mgr
+SQL> /
+
+       MGR   SUM(SAL)                                                           
+---------- ----------                                                           
+      7566       6000                                                           
+      7698       6550                                                           
+      7782       1300                                                           
+      7788       1100                                                           
+      7839       8275                                                           
+      7902        800                                                           
+
+6 rows selected.
+
+SQL> --9
+SQL> select deptno,avg(sal)
+  2  from emp
+  3  group by deptno
+  4  having avg(sal) between 1000 and 3000;
+
+    DEPTNO   AVG(SAL)                                                           
+---------- ----------                                                           
+        30 1566.66667                                                           
+        20       2175                                                           
+        10 2916.66667                                                           
+
+SQL> --10
+SQL> select job,count(*),avg(sal)
+  2  from emp
+  3  group by job
+  4  having count(*) > 2
+  5  order by avg(sal) desc;
+
+JOB         COUNT(*)   AVG(SAL)                                                 
+--------- ---------- ----------                                                 
+MANAGER            3 2758.33333                                                 
+SALESMAN           4       1400                                                 
+CLERK              4     1037.5                                                 
+
+SQL> --11
+SQL> select e.ename,d.dname
+  2  from emp e
+  3  join dept d
+  4  on e.deptno=d.deptno
+  5  order by d.dname,e.ename;
+
+ENAME      DNAME                                                                
+---------- --------------                                                       
+CLARK      ACCOUNTING                                                           
+KING       ACCOUNTING                                                           
+MILLER     ACCOUNTING                                                           
+ADAMS      RESEARCH                                                             
+FORD       RESEARCH                                                             
+JONES      RESEARCH                                                             
+SCOTT      RESEARCH                                                             
+SMITH      RESEARCH                                                             
+ALLEN      SALES                                                                
+BLAKE      SALES                                                                
+JAMES      SALES                                                                
+
+ENAME      DNAME                                                                
+---------- --------------                                                       
+MARTIN     SALES                                                                
+TURNER     SALES                                                                
+WARD       SALES                                                                
+
+14 rows selected.
+
+SQL> --12
+SQL> select e.ename,d.loc
+  2  from emp e
+  3  join dept d
+  4  on e.deptno=d.deptno
+  5  where d.loc='CHICAGO';
+
+ENAME      LOC                                                                  
+---------- -------------                                                        
+ALLEN      CHICAGO                                                              
+WARD       CHICAGO                                                              
+MARTIN     CHICAGO                                                              
+BLAKE      CHICAGO                                                              
+TURNER     CHICAGO                                                              
+JAMES      CHICAGO                                                              
+
+6 rows selected.
+
+SQL> --13.
+SQL> SELECT E.ENAME,D.LOC
+  2  FROM EMP
+  3  E JOIN DEPT D
+  4  ON E.DEPTNO=D.DEPTNO
+  5  GROUP BY D.DEPTNO;
+SELECT E.ENAME,D.LOC
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> --13
+SQL> ED;
+Wrote file afiedt.buf
+
+  1  SELECT E.ENAME,D.LOC
+  2  FROM EMP
+  3  E JOIN DEPT D
+  4* ON E.DEPTNO=D.DEPTNO
+SQL> /
+
+ENAME      LOC                                                                  
+---------- -------------                                                        
+SMITH      DALLAS                                                               
+ALLEN      CHICAGO                                                              
+WARD       CHICAGO                                                              
+JONES      DALLAS                                                               
+MARTIN     CHICAGO                                                              
+BLAKE      CHICAGO                                                              
+CLARK      NEW YORK                                                             
+SCOTT      DALLAS                                                               
+KING       NEW YORK                                                             
+TURNER     CHICAGO                                                              
+ADAMS      DALLAS                                                               
+
+ENAME      LOC                                                                  
+---------- -------------                                                        
+JAMES      CHICAGO                                                              
+FORD       DALLAS                                                               
+MILLER     NEW YORK                                                             
+
+14 rows selected.
+
+SQL> --14
+SQL> SELECT D.DNAME,E.ENAME
+  2  FROM EMP E
+  3  JOIN DEPT D
+  4  ON E.DEPTNO=D.DEPTNO
+  5  WHERE E.EMPNO IS NULL;
+
+no rows selected
+
+SQL> ED;
+Wrote file afiedt.buf
+
+  1  SELECT D.DNAME,D.LOC
+  2  FROM EMP E
+  3  JOIN DEPT D
+  4  ON E.DEPTNO=D.DEPTNO
+  5* WHERE E.EMPNO IS NULL
+SQL> /
+
+no rows selected
+
+SQL> SPOOL OFF;

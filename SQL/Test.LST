@@ -1,0 +1,5 @@
+SQL> --1
+SQL>  CLS SCREEN;
+SP2-0042: unknown command "CLS SCREEN" - rest of line ignored.
+SQL> CL SCR;
+SQL> Spool D:\SQL\SQL_TEST

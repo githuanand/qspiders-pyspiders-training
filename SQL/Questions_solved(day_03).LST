@@ -1,0 +1,275 @@
+SQL> -- waqtd the annual salary of the employee whose name is smith.
+ 
+SQL> SELECT SAL,SAL*12
+  2  FROM EMP
+  3  WHERE ENAME='SMITH';
+
+       SAL     SAL*12                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+       800       9600                                                                                                                                                                                   
+
+SQL> -- 2 WAQTD NAME OF THE EMPLOYEES WORKING AS CLERK
+SQL> SELECT ENAME,JOB
+  2  FROM EMP
+  3  WHERE JOB='CLERK';
+
+ENAME      JOB                                                                                                                                                                                          
+---------- ---------                                                                                                                                                                                    
+SMITH      CLERK                                                                                                                                                                                        
+ADAMS      CLERK                                                                                                                                                                                        
+JAMES      CLERK                                                                                                                                                                                        
+MILLER     CLERK                                                                                                                                                                                        
+
+SQL> -- 3 WAQTD DETAILS OF THE EMPLOYEES WHO ARE WORKING AS SALESMAN.\
+SQL> SELECT EMP.*
+  2  FROM EMP
+  3  WHERE JOB='SALESMAN';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                                                                                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                                                                                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                                                                                                   
+
+SQL> -- 4 WAQTD DETAILS OF THE EMPLOYEES WHO EARN MORE THAN 2000.
+SQL> SELECT EMP.*
+  2  FROM EMP
+  3  WHERE SAL>2000;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+
+6 rows selected.
+
+SQL> -- WAQTD DETAILS OF THE EMP WHOSE NAME IS JOB.
+SQL> -- JONES.
+SQL> 
+SQL> SELECT EMP.*
+  2  FROM ENAME
+  3  WHERE ENAME='JONES';
+FROM ENAME
+     *
+ERROR at line 2:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT EMP.*
+  2  FROM EMP
+  3  WHERE ENAME='JONES'4
+  4  ;
+WHERE ENAME='JONES'4
+                   *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT EMP.*
+  2  FROM EMP
+  3  WHERE ENAME='JONES';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+
+SQL> -- 6 WAQTD DETAILS OF THE EMPLOYEE WHO WAS HIRED AFTER 01-JAN-81.
+SQL> SELECT EMP.*
+  2  FROM EMP
+  3  WHERE HIREDATE='01-JAN-81';
+
+no rows selected
+
+SQL> SELECT EMP.*
+  2  FROM EMP
+  3  WHERE HIREDATE<'01-JAN-81';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                                                                                                   
+
+SQL> SELECT EMP.*
+  2  FROM EMP
+  3  WHERE HIREDATE>'01-JAN-81';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                                                                                                   
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20                                                                                                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                                                                                                   
+
+13 rows selected.
+
+SQL> -- 7 WAQTD NAME AND SAL ALONG WITH HIS ANNUAL SALARY IF THE ANNUAL SALARY IS MORE THAN 12000.
+SQL> SELECT ENAME,SAL
+  2  ,SAL*!2
+  3  ;
+,SAL*!2
+     *
+ERROR at line 2:
+ORA-00936: missing expression 
+
+
+SQL> SELECT ENAME,SAL*12
+  2  FROM EMP
+  3  WHERE SAL*12>12000;
+
+ENAME          SAL*12                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+ALLEN           19200                                                                                                                                                                                   
+WARD            15000                                                                                                                                                                                   
+JONES           35700                                                                                                                                                                                   
+MARTIN          15000                                                                                                                                                                                   
+BLAKE           34200                                                                                                                                                                                   
+CLARK           29400                                                                                                                                                                                   
+SCOTT           36000                                                                                                                                                                                   
+KING            60000                                                                                                                                                                                   
+TURNER          18000                                                                                                                                                                                   
+ADAMS           13200                                                                                                                                                                                   
+FORD            36000                                                                                                                                                                                   
+MILLER          15600                                                                                                                                                                                   
+
+12 rows selected.
+
+SQL> -- 8 WAQTD EMPNO OF THE EMPLOYEES WHO ARE WORKING IN DEPT NO 30
+SQL> SELECT EMPNO
+  2  FROM EMP
+  3  WHERE DEPTNO=30;
+
+     EMPNO                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      7499                                                                                                                                                                                              
+      7521                                                                                                                                                                                              
+      7654                                                                                                                                                                                              
+      7698                                                                                                                                                                                              
+      7844                                                                                                                                                                                              
+      7900                                                                                                                                                                                              
+
+6 rows selected.
+
+SQL> -- 9 WAQTD ENAME AND HIREDATE IF THEY ARE HIRED BEFORE 1981.
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT ENAME,HIREDATE
+  2  FROM EMP
+  3  WHERE HIREDATE<'01-JAN-1981';
+
+ENAME      HIREDATE                                                                                                                                                                                     
+---------- ---------                                                                                                                                                                                    
+SMITH      17-DEC-80                                                                                                                                                                                    
+
+SQL> -- 10 WAQTD DETAILS OF THE EMPLOYEES WORKING AS MANAGER
+SQL> SELECT EMP.*
+  2  FROM EMP
+  3  WHERE JOB ='MANAGER';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+
+SQL> -- 11. WAQTD NAME AND SALARY GIVEN TO AN EMPLOYEE IF EMPLOYEE EARNS A COMMISSION OF RS 1400.
+SQL> SELECT ENAME,SAL
+  2  FROM EMP
+  3  WHERE COMM=1400;
+
+ENAME             SAL                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+MARTIN           1250                                                                                                                                                                                   
+
+SQL> -- 12 WAQTD DETAILS OF THE EMPLOYEES HAVING COMMISSION MORE THAN SALARY.
+SQL> SELECT EMP.*
+  2  FROM EMP
+  3  WHERE COMM>SAL;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                                                                                                   
+
+SQL> -- 13. WAQTD EMPNO OF THE EMPLOYEES HIRED BEFORE THE YEAR 87.
+SQL> SELECT EMPNO,HIREDATE
+  2  FROM EMP
+  3  WHERE HIREDATE<'01-JAN-87';
+
+     EMPNO HIREDATE                                                                                                                                                                                     
+---------- ---------                                                                                                                                                                                    
+      7369 17-DEC-80                                                                                                                                                                                    
+      7499 20-FEB-81                                                                                                                                                                                    
+      7521 22-FEB-81                                                                                                                                                                                    
+      7566 02-APR-81                                                                                                                                                                                    
+      7654 28-SEP-81                                                                                                                                                                                    
+      7698 01-MAY-81                                                                                                                                                                                    
+      7782 09-JUN-81                                                                                                                                                                                    
+      7839 17-NOV-81                                                                                                                                                                                    
+      7844 08-SEP-81                                                                                                                                                                                    
+      7900 03-DEC-81                                                                                                                                                                                    
+      7902 03-DEC-81                                                                                                                                                                                    
+      7934 23-JAN-82                                                                                                                                                                                    
+
+12 rows selected.
+
+SQL> -- 14 WAQTD DETAILS OF THE EMPLOYEES WORKING AS AN ANALYST.
+SQL> SELECT EMP.*
+  2  FROM EMP'
+  3  WHERE JOB ='ANALYST';
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> SELECT EMP.*
+  2  FROM EMP
+  3  WHERE JOB='ANALYST';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+
+SQL> --15 WAQTD DETAILS OF THE EMPS EARNING MORE THAN 2000 RUPEES PER MONTH.
+SQL> SELECT EMP.*
+  2  FROM EMP
+  3  WHERE SAL>2000;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+
+6 rows selected.
+
+SQL> SET LINES 100 PAGES 100
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+
+6 rows selected.
+
+SQL> SPOOL OFF;

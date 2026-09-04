@@ -1,0 +1,77 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #h1{
+        color:green;
+    }
+    .h11{
+        color:aqua !important;
+    }
+
+    h1[id="h1"]{
+        color:blue;
+    }
+
+    h1{
+        color:brown;
+    }
+
+    *{
+        color:pink;
+    }
+
+</style>
+<body>
+    <h1 id="h1" class="h11">hiiiiiiiiii</h1>
+
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Specificity Demo</title>
+  <style>
+    /* Universal selector */
+    * {
+      color: pink;
+    }
+
+    /* Element selector */
+    h1 {
+      color: brown;
+    }
+
+    /* Class selector */
+    .h11 {
+      color: aqua;
+    }
+
+    /* ID selector */
+    #h1 {
+      color: green;
+    }
+
+    /* Attribute selector */
+    h1[id="h1"] {
+      color: blue;
+    }
+
+    /* With !important (highest) */
+    .h11 {
+      color: aqua !important;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="h1" class="h11">hiiiiiiiiii</h1>
+</body>
+</html>

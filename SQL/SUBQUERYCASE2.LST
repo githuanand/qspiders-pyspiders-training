@@ -1,0 +1,255 @@
+SQL> set lines 200 pages 100
+SQL> /
+SP2-0103: Nothing in SQL buffer to run.
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                                                                                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                                                                                                   
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20                                                                                                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                                                                                                   
+
+14 rows selected.
+
+SQL> --1
+SQL> ;
+  1* select * from emp
+SQL> -- subquery case 2
+SQL> --1
+SQL> select dname
+  2  from dept
+  3  where deptno IN(Select deptno
+  4  ;
+
+*
+ERROR at line 4:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> select * from dept;
+
+    DEPTNO DNAME          LOC                                                                                                                                                                           
+---------- -------------- -------------                                                                                                                                                                 
+        10 ACCOUNTING     NEW YORK                                                                                                                                                                      
+        20 RESEARCH       DALLAS                                                                                                                                                                        
+        30 SALES          CHICAGO                                                                                                                                                                       
+        40 OPERATIONS     BOSTON                                                                                                                                                                        
+
+SQL> select dname
+  2  from dept
+  3  where deptno in(select deptno
+  4  from emp
+  5  where ename='SMITH';
+where ename='SMITH'
+                  *
+ERROR at line 5:
+ORA-00907: missing right parenthesis 
+
+
+SQL> select dname
+  2  from dept
+  3  where deptno in (select deptno
+  4  from emp
+  5  where ename='SMITH');
+
+DNAME                                                                                                                                                                                                   
+--------------                                                                                                                                                                                          
+RESEARCH                                                                                                                                                                                                
+
+SQL> --2
+SQL> select dname,loc
+  2  from dept
+  3  where deptno in(select deptno
+  4  from emp
+  5  where ename='KING');
+
+DNAME          LOC                                                                                                                                                                                      
+-------------- -------------                                                                                                                                                                            
+ACCOUNTING     NEW YORK                                                                                                                                                                                 
+
+SQL> --3
+SQL> select loc
+  2  from dept
+  3  where deptno in(select deptno
+  4  from emp
+  5  where empno=7902);
+
+LOC                                                                                                                                                                                                     
+-------------                                                                                                                                                                                           
+DALLAS                                                                                                                                                                                                  
+
+SQL> --4
+SQL> select dname,loc,deptno
+  2  ;
+
+*
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> --4
+SQL> select dname,loc,deptno
+  2  from dept
+  3  where deptno in(select deptno
+  4  from emp
+  5  where ename like'%R');
+
+DNAME          LOC               DEPTNO                                                                                                                                                                 
+-------------- ------------- ----------                                                                                                                                                                 
+ACCOUNTING     NEW YORK              10                                                                                                                                                                 
+SALES          CHICAGO               30                                                                                                                                                                 
+
+SQL> --5
+SQL> select dname
+  2  from emp
+  3  where deptno in(select deptno
+  4  from emp
+  5  where job='PRESIDENT');
+select dname
+       *
+ERROR at line 1:
+ORA-00904: "DNAME": invalid identifier 
+
+
+SQL> --5
+SQL> SELECT DNAME
+  2  FROM DEPT
+  3  WHERE DEPTNO IN(SELECT DEPTNO
+  4  FROM EMP
+  5  WHERE JOB='PRESIDENT');
+
+DNAME                                                                                                                                                                                                   
+--------------                                                                                                                                                                                          
+ACCOUNTING                                                                                                                                                                                              
+
+SQL> --6
+SQL> SELECT DNAME
+  2  ;
+
+*
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> --6
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE DNAME IN(SELECT DNAME
+  4  FROM DEPT
+  5  WHERE DNAME='ACCOUNTING');
+WHERE DNAME IN(SELECT DNAME
+      *
+ERROR at line 3:
+ORA-00904: "DNAME": invalid identifier 
+
+
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE DEPTNO IN(SELECT DEPTNO
+  4  FROM DEPT
+  5  WHERE DNAME=ACCOUNTING);
+WHERE DNAME=ACCOUNTING)
+            *
+ERROR at line 5:
+ORA-00904: "ACCOUNTING": invalid identifier 
+
+
+SQL> 
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE DEPTNO IN(SELECT DEPTNO
+  4  FROM DEPT
+  5  WHERE DNAME='ACCOUNTING');
+
+ENAME                                                                                                                                                                                                   
+----------                                                                                                                                                                                              
+CLARK                                                                                                                                                                                                   
+KING                                                                                                                                                                                                    
+MILLER                                                                                                                                                                                                  
+
+SQL> --7
+SQL> SELECT ENAME,SAL
+  2  FROM EMP
+  3  WHERE DEPTNO IN(SELECT DEPTNO
+  4  FROM DEPT
+  5  WHERE LOC='CHICAGO');
+
+ENAME             SAL                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+ALLEN            1600                                                                                                                                                                                   
+WARD             1250                                                                                                                                                                                   
+MARTIN           1250                                                                                                                                                                                   
+BLAKE            2850                                                                                                                                                                                   
+TURNER           1500                                                                                                                                                                                   
+JAMES             950                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> --8
+SQL> SELECT EMP.*
+  2  FROM EMP
+  3  WHERE DEPTNO IN(SELECT DEPTNO
+  4  FROM DEPT
+  5  WHERE DNAME='SALES');
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                                                                                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                                                                                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                   
+
+6 rows selected.
+
+SQL> --9
+SQL> SELECT EMP.*,SAL*12 AS ANNUAL_SAL
+  2  FROM EMP
+  3  WHERE DEPTNO = (SELECT DEPTNO
+  4  FROM DEPT
+  5  WHERE LOC IN 'NEW YORK');
+IF DEPTNO=(SELECT DEPTNO
+   *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> --10
+SQL> SELECT ENAME
+  2  FROM EMO
+  3  ;
+FROM EMO
+     *
+ERROR at line 2:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE DEPTNO IN(SELECT DEPTNO
+  4  FROM DEPT
+  5  WHERE DNAME='IN OPERATIONS');
+
+no rows selected
+
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE DEPTNO IN(SELECT DEPTNO
+  4  FROM DEPT
+  5  WHERE DNAME='OPERATIONS');
+
+no rows selected
+
+SQL> SPOOL OFF;

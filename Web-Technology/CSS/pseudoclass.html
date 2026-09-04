@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSEUDO-CLASS-ELEMENT</title>
+    <style>
+        a:link{
+            color:blue;
+        }
+        a:visited{
+            color:red;
+        }
+        a:active{
+            color:brown;
+        }
+        button:hover{
+            background-color: hotpink;
+        }
+/*        
+        p:first-child{
+            color:red;
+        }
+
+        p:last-child{
+            color:blue;
+        }
+
+        p:nth-child(3){
+            color:aqua;
+        }
+
+        p:nth-last-child(2){
+            color:goldenrod;
+        }
+        p:only-child{
+            color:green;
+        }
+*/  
+
+        p:first-of-type{
+            color:red;
+        }
+
+        p:last-of-type{
+            color:blue;
+        }
+
+        p:nth-of-type(even){
+            color:aqua;
+        }
+        
+        p:nth-last-of-type(odd){
+            color:cadetblue;
+        }
+
+        p:only-of-type{
+            color:green;
+        }
+
+        #box:checked{
+            box-shadow: 0px 0px 2px 2px red;
+        }
+
+        input::placeholder{
+            color:red;
+        }
+
+        input:focus{
+            background-color: lightgreen;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- <a href="https://www.facebook.com/" target="_blank"></a>
+    <button>CLICK ME</button> -->
+
+    <input type="checkbox" name="" id="box">html
+    <input type="text" name="" id="" placeholder="enter the name: ">
+    <hr>
+    <div>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <p>Lorem ipsum dolor sit amet.</p>
+    </div>
+    <hr>
+
+        <div>
+            <p>Lorem ipsum dolor sit amet.</p>
+            <p>Lorem ipsum dolor sit amet.</p>
+            <p>Lorem ipsum dolor sit amet.</p>
+            <p>Lorem ipsum dolor sit amet.</p>
+            <p>Lorem ipsum dolor sit amet.</p>
+        </div>
+        <hr>
+            <div>
+                <p>Lorem ipsum dolor sit amet.</p>
+                <p>Lorem ipsum dolor sit amet.</p>
+                <p>Lorem ipsum dolor sit amet.</p>
+                <p>Lorem ipsum dolor sit amet.</p>
+                <p>Lorem ipsum dolor sit amet.</p>
+            </div>
+            <hr>
+
+            <div>
+                <p>Lorem ipsum dolor sit amet.</p>
+            </div>
+</body>
+</html>
+<!-- input: focus belongs to pseudoclass selector -->

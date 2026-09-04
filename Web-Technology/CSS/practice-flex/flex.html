@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flexbox Properties Demo</title>
+  <style>
+    .item {
+      height: 100px;
+      width: 100px;
+      background-color: teal;
+      border: 2px dashed black;
+      font-size: 50px;
+      color: navy;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Parent Container */
+    #main {
+      display: flex;
+      height: 100vh;
+
+      /* Direction */
+      /* flex-direction: row; */
+      /* flex-direction: row-reverse; */
+      /* flex-direction: column; */
+      /* flex-direction: column-reverse; */
+
+      /* Justify Content */
+      /* justify-content: flex-start; */
+      /* justify-content: flex-end; */
+      /* justify-content: center; */
+      /* justify-content: space-between; */
+      /* justify-content: space-around; */
+      /* justify-content: space-evenly; */
+
+      /* Align Items */
+      /* align-items: flex-start; */
+      /* align-items: flex-end; */
+      /* align-items: center; */
+      /* align-items: stretch; */
+
+      /* Flex Wrap */
+      flex-wrap: wrap;
+      /* flex-wrap: wrap-reverse; */
+      /* flex-wrap: nowrap; */
+
+      /* Align Content (works with wrapping) */
+      /* align-content: flex-start; */
+      /* align-content: flex-end; */
+      align-content: space-evenly;
+
+      /* Gap */
+      /* column-gap: 20px;
+      row-gap: 30px; */
+      gap: 50px 10px;
+    }
+
+    /* Child Items */
+    #item-1 {
+      /* align-self: flex-start; */
+      /* align-self: flex-end; */
+      /* align-self: center; */
+
+      /* Flex grow/shrink/basis */
+      /* flex-grow: 2; */
+      /* flex-shrink: 2; */
+      /* flex-basis: 200px; */
+      flex: 2 2 200px;
+
+      order: 3;
+    }
+
+    #item-2 {
+      order: 2;
+    }
+
+    #item-3 {
+      order: 4;
+    }
+
+    #item-4 {
+      align-self: flex-start;
+      /* flex: 1 1 300px; */
+      order: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="main">
+    <div class="item" id="item-1">1</div>
+    <div class="item" id="item-2">2</div>
+    <div class="item" id="item-3">3</div>
+    <div class="item" id="item-4">4</div>
+    <!--
+    <div class="item" id="item-5">5</div>
+    <div class="item" id="item-6">6</div>
+    <div class="item" id="item-7">7</div>
+    <div class="item" id="item-8">8</div>
+    -->
+  </div>
+</body>
+</html>

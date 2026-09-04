@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <!-- ✅ Fixed static path -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1 id="title">🌤 Weather App</h1>
+
+        <!-- Search Form -->
+        <form method="get" id="search-form">
+            <input type="text" name="city" id="city-input" placeholder="🔎 Enter city..." required>
+            <button type="submit" id="search-btn">Search</button>
+        </form>
+
+        <!-- Weather Result -->
+        {% if weather.city %}
+        <div class="card" id="weather-card">
+            <h2 id="city-name">{{ weather.city }}</h2>
+            <img id="icon" src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="Weather Icon">
+            <p id="temp">🌡 <span>{{ weather.temp }}</span> °C</p>
+            <p id="feels">Feels Like: <span>{{ weather.feels_like }}</span> °C</p>
+            <p id="humidity">💧 Humidity: <span>{{ weather.humidity }}</span>%</p>
+            <p id="desc">Condition: <span>{{ weather.desc }}</span></p>
+        </div>
+        {% else %}
+            <p id="default-msg">🌍 Enter a city to check the weather</p>
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>🚀 Built with ❤️ using Django | <span>By Anand Mohan Jha</span></p>
+    </footer>
+</body>
+</html>

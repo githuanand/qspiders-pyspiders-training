@@ -1,0 +1,480 @@
+SQL> 
+SQL> --1
+SQL> SELECT * FROM emp
+  2  WHERE LENGTH(ename) > 4;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+11 rows selected.
+
+SQL> --2
+SQL> SELECT * FROM emp
+  2  WHERE salary BETWEEN 100 AND 9999;
+WHERE salary BETWEEN 100 AND 9999
+      *
+ERROR at line 2:
+ORA-00904: "SALARY": invalid identifier 
+
+
+SQL> SELECT * FROM EMP
+  2  WHERE SAL BETWEEN 100 AND 9999;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+14 rows selected.
+
+SQL> --3
+SQL> SELECT 'HI ' || ename FROM emp;
+
+'HI'||ENAME                                                                                         
+-------------                                                                                       
+HI SMITH                                                                                            
+HI ALLEN                                                                                            
+HI WARD                                                                                             
+HI JONES                                                                                            
+HI MARTIN                                                                                           
+HI BLAKE                                                                                            
+HI CLARK                                                                                            
+HI SCOTT                                                                                            
+HI KING                                                                                             
+HI TURNER                                                                                           
+HI ADAMS                                                                                            
+HI JAMES                                                                                            
+HI FORD                                                                                             
+HI MILLER                                                                                           
+
+14 rows selected.
+
+SQL> --4
+SQL> SELECT * FROM emp
+  2  WHERE MOD(empno, 2) = 1;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+
+SQL> --5
+SQL> SELECT ename, salary FROM emp
+  2  ;
+SELECT ename, salary FROM emp
+              *
+ERROR at line 1:
+ORA-00904: "SALARY": invalid identifier 
+
+
+SQL> SELECT ENAME,SAL FROM EMP
+  2  WHERE MOD(sal,2)=1 AND MOD(EMPNO,2) =0;
+
+ENAME             SAL                                                                               
+---------- ----------                                                                               
+JONES            2975                                                                               
+
+SQL> --6
+SQL> SELECT UPPER(ename), UPPER(job) FROM emp;
+
+UPPER(ENAM UPPER(JOB                                                                                
+---------- ---------                                                                                
+SMITH      CLERK                                                                                    
+ALLEN      SALESMAN                                                                                 
+WARD       SALESMAN                                                                                 
+JONES      MANAGER                                                                                  
+MARTIN     SALESMAN                                                                                 
+BLAKE      MANAGER                                                                                  
+CLARK      MANAGER                                                                                  
+SCOTT      ANALYST                                                                                  
+KING       PRESIDENT                                                                                
+TURNER     SALESMAN                                                                                 
+ADAMS      CLERK                                                                                    
+JAMES      CLERK                                                                                    
+FORD       ANALYST                                                                                  
+MILLER     CLERK                                                                                    
+
+14 rows selected.
+
+SQL> --7
+SQL> SELECT LOWER(dname), LOWER(loc)
+  2  FROM dept;
+
+LOWER(DNAME)   LOWER(LOC)                                                                           
+-------------- -------------                                                                        
+accounting     new york                                                                             
+research       dallas                                                                               
+sales          chicago                                                                              
+operations     boston                                                                               
+
+SQL> --8
+SQL> SELECT LOWER(ename), INITCAP(job)
+  2  FROM emp
+  3  WHERE comm IS NOT NULL;
+
+LOWER(ENAM INITCAP(J                                                                                
+---------- ---------                                                                                
+allen      Salesman                                                                                 
+ward       Salesman                                                                                 
+martin     Salesman                                                                                 
+turner     Salesman                                                                                 
+
+SQL> --9
+SQL> SELECT ROUND(SAL) FROM emp;
+
+ROUND(SAL)                                                                                          
+----------                                                                                          
+       800                                                                                          
+      1600                                                                                          
+      1250                                                                                          
+      2975                                                                                          
+      1250                                                                                          
+      2850                                                                                          
+      2450                                                                                          
+      3000                                                                                          
+      5000                                                                                          
+      1500                                                                                          
+      1100                                                                                          
+       950                                                                                          
+      3000                                                                                          
+      1300                                                                                          
+
+14 rows selected.
+
+SQL> --10
+SQL> SELECT TRUNC(SAL)
+  2  FROM EMP;
+
+TRUNC(SAL)                                                                                          
+----------                                                                                          
+       800                                                                                          
+      1600                                                                                          
+      1250                                                                                          
+      2975                                                                                          
+      1250                                                                                          
+      2850                                                                                          
+      2450                                                                                          
+      3000                                                                                          
+      5000                                                                                          
+      1500                                                                                          
+      1100                                                                                          
+       950                                                                                          
+      3000                                                                                          
+      1300                                                                                          
+
+14 rows selected.
+
+SQL> --11
+SQL> SELECT * FROM dept
+  2  WHERE LENGTH(LOC) > 7;
+
+    DEPTNO DNAME          LOC                                                                       
+---------- -------------- -------------                                                             
+        10 ACCOUNTING     NEW YORK                                                                  
+
+SQL> --12
+SQL> SELECT ename FROM emp
+  2  WHERE ename LIKE '%H';
+
+ENAME                                                                                               
+----------                                                                                          
+SMITH                                                                                               
+
+SQL> --13
+SQL> SELECT ename, SAL, hiredate FROM emp
+  2  WHERE ename LIKE 'J%';
+
+ENAME             SAL HIREDATE                                                                      
+---------- ---------- ---------                                                                     
+JONES            2975 02-APR-81                                                                     
+JAMES             950 03-DEC-81                                                                     
+
+SQL> --14
+SQL> SELECT * FROM dept
+  2  WHERE SUBSTR(dname, 2, 1) = 'A';
+
+    DEPTNO DNAME          LOC                                                                       
+---------- -------------- -------------                                                             
+        30 SALES          CHICAGO                                                                   
+
+SQL> --15
+SQL> SELECT SUBSTR(dname, 1, LENGTH(dname) / 2) FROM dept;
+
+SUBSTR(DNAME,1                                                                                      
+--------------                                                                                      
+ACCOU                                                                                               
+RESE                                                                                                
+SA                                                                                                  
+OPERA                                                                                               
+
+SQL> --16
+SQL> SELECT SUBSTR(LOC, LENGTH(LOC) / 2 + 1) FROM dept;
+
+SUBSTR(LOC,LE                                                                                       
+-------------                                                                                       
+YORK                                                                                                
+LAS                                                                                                 
+CAGO                                                                                                
+TON                                                                                                 
+
+SQL> --17
+SQL> SELECT ename, comm FROM emp
+  2  WHERE ename LIKE '%I%';
+
+ENAME            COMM                                                                               
+---------- ----------                                                                               
+SMITH                                                                                               
+MARTIN           1400                                                                               
+KING                                                                                                
+MILLER                                                                                              
+
+SQL> --18
+SQL> SELECT ename, job FROM emp
+  2  WHERE LENGTH(ename) - LENGTH(REPLACE(ename, 'A', '')) >= 2;
+
+ENAME      JOB                                                                                      
+---------- ---------                                                                                
+ADAMS      CLERK                                                                                    
+
+SQL> --19
+SQL> SELECT LOC FROM dept
+  2  WHERE dname LIKE 'RES%';
+
+LOC                                                                                                 
+-------------                                                                                       
+DALLAS                                                                                              
+
+SQL> --20
+SQL> SELECT REPLACE(ename, 'A', 'P') FROM emp;
+
+REPLACE(EN                                                                                          
+----------                                                                                          
+SMITH                                                                                               
+PLLEN                                                                                               
+WPRD                                                                                                
+JONES                                                                                               
+MPRTIN                                                                                              
+BLPKE                                                                                               
+CLPRK                                                                                               
+SCOTT                                                                                               
+KING                                                                                                
+TURNER                                                                                              
+PDPMS                                                                                               
+JPMES                                                                                               
+FORD                                                                                                
+MILLER                                                                                              
+
+14 rows selected.
+
+SQL> --21
+SQL> SELECT * FROM emp
+  2  WHERE LENGTH(job) - LENGTH(REPLACE(job, 'A', '')) = 2;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+
+9 rows selected.
+
+SQL> --2
+SQL> --22
+SQL> SELECT UPPER(ename), UPPER(job) FROM emp
+  2  WHERE UPPER(ename) LIKE 'A%' OR UPPER(ename) LIKE 'E%'
+  3  OR UPPER(ename) LIKE 'I%' OR UPPER(ename) LIKE 'O%'
+  4  OR UPPER(ename) LIKE 'U%';
+
+UPPER(ENAM UPPER(JOB                                                                                
+---------- ---------                                                                                
+ALLEN      SALESMAN                                                                                 
+ADAMS      CLERK                                                                                    
+
+SQL> --23
+SQL> SELECT UPPER(ename), UPPER(job) FROM emp
+  2  WHERE UPPER(job) NOT LIKE '%A' AND UPPER(job) NOT LIKE '%E'
+  3  AND UPPER(job) NOT LIKE '%I' AND UPPER(job) NOT LIKE '%O'
+  4  AND UPPER(job) NOT LIKE '%U';
+
+UPPER(ENAM UPPER(JOB                                                                                
+---------- ---------                                                                                
+SMITH      CLERK                                                                                    
+ALLEN      SALESMAN                                                                                 
+WARD       SALESMAN                                                                                 
+JONES      MANAGER                                                                                  
+MARTIN     SALESMAN                                                                                 
+BLAKE      MANAGER                                                                                  
+CLARK      MANAGER                                                                                  
+SCOTT      ANALYST                                                                                  
+KING       PRESIDENT                                                                                
+TURNER     SALESMAN                                                                                 
+ADAMS      CLERK                                                                                    
+JAMES      CLERK                                                                                    
+FORD       ANALYST                                                                                  
+MILLER     CLERK                                                                                    
+
+14 rows selected.
+
+SQL> --24
+SQL> SELECT LOWER(SUBSTR(ename, 1, 3)) || UPPER(SUBSTR(ename, 4)) FROM emp;
+
+LOWER(SUBS                                                                                          
+----------                                                                                          
+smiTH                                                                                               
+allEN                                                                                               
+warD                                                                                                
+jonES                                                                                               
+marTIN                                                                                              
+blaKE                                                                                               
+claRK                                                                                               
+scoTT                                                                                               
+kinG                                                                                                
+turNER                                                                                              
+adaMS                                                                                               
+jamES                                                                                               
+forD                                                                                                
+milLER                                                                                              
+
+14 rows selected.
+
+SQL> --25
+SQL> SELECT ename || ' HAPPY BIRTHDAY' FROM emp
+  2  WHERE hiredate > TO_DATE('01-JAN-1981', 'DD-MON-YYYY');
+
+ENAME||'HAPPYBIRTHDAY'                                                                              
+-------------------------                                                                           
+ALLEN HAPPY BIRTHDAY                                                                                
+WARD HAPPY BIRTHDAY                                                                                 
+JONES HAPPY BIRTHDAY                                                                                
+MARTIN HAPPY BIRTHDAY                                                                               
+BLAKE HAPPY BIRTHDAY                                                                                
+CLARK HAPPY BIRTHDAY                                                                                
+SCOTT HAPPY BIRTHDAY                                                                                
+KING HAPPY BIRTHDAY                                                                                 
+TURNER HAPPY BIRTHDAY                                                                               
+ADAMS HAPPY BIRTHDAY                                                                                
+JAMES HAPPY BIRTHDAY                                                                                
+FORD HAPPY BIRTHDAY                                                                                 
+MILLER HAPPY BIRTHDAY                                                                               
+
+13 rows selected.
+
+SQL> --26
+SQL> SELECT * FROM emp
+  2  WHERE TO_CHAR(hiredate, 'MM') = '07';
+
+no rows selected
+
+SQL> --27
+SQL> SELECT ename, SAL, hiredate FROM emp
+  2  WHERE TO_CHAR(hiredate, 'DAY') = 'MONDAY';
+
+no rows selected
+
+SQL> --28
+SQL> SELECT * FROM emp
+  2  WHERE TO_CHAR(hiredate, 'MM') = '01'
+  3  AND TO_CHAR(hiredate, 'DY') = 'WED'
+  4  AND TO_CHAR(hiredate, 'HH24') = '11';
+
+no rows selected
+
+SQL> --29
+SQL> SELECT ename, SAL + NVL(comm, 0) AS total_earning, hiredate FROM emp;
+
+ENAME      TOTAL_EARNING HIREDATE                                                                   
+---------- ------------- ---------                                                                  
+SMITH                800 17-DEC-80                                                                  
+ALLEN               1900 20-FEB-81                                                                  
+WARD                1750 22-FEB-81                                                                  
+JONES               2975 02-APR-81                                                                  
+MARTIN              2650 28-SEP-81                                                                  
+BLAKE               2850 01-MAY-81                                                                  
+CLARK               2450 09-JUN-81                                                                  
+SCOTT               3000 19-APR-87                                                                  
+KING                5000 17-NOV-81                                                                  
+TURNER              1500 08-SEP-81                                                                  
+ADAMS               1100 23-MAY-87                                                                  
+JAMES                950 03-DEC-81                                                                  
+FORD                3000 03-DEC-81                                                                  
+MILLER              1300 23-JAN-82                                                                  
+
+14 rows selected.
+
+SQL> --30
+SQL> SELECT * FROM emp
+  2  WHERE TRUNC(MONTHS_BETWEEN(SYSDATE, hiredate) / 12) > 35;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+14 rows selected.
+
+SQL> -----------------------------------------
+SQL> SELECT * FROM EMP;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+14 rows selected.
+
+SQL> SPOOL OFF;

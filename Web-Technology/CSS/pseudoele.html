@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p::first-letter{
+            color:blue;
+        }
+
+        p::first-line{
+            color:red;
+        }
+
+        p::before{
+           /* content: "welcome=>"; */
+            content:url(../image/yuvipaji.jpg);
+        }
+
+        p::after{
+            /*content: " thank you ";*/
+            content:url(../image/virat.webp);
+        }
+
+        li::marker{
+            /*color:red;*/
+            content:"💗" ;
+            
+        }
+
+        p::selection{
+            color:red;
+            background-color: black;
+        }
+
+    </style>
+</head>
+<body>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, eligendi. Asperiores voluptatibus id animi sint earum fuga facere, molestias neque dolore porro dignissimos, obcaecati libero quod, magni eos consequatur! Commodi quis quo totam numquam blanditiis est architecto dicta aliquid molestiae eos minus corporis voluptate, ad ex soluta necessitatibus perspiciatis dolorum eaque dolorem repellat modi libero dolore. Officia recusandae amet quia! Maxime fugit tempora a ut temporibus, debitis quisquam reprehenderit. Consequatur dolor culpa aliquid autem enim, beatae ducimus aut error assumenda illum sapiente impedit, tenetur possimus aliquam eum, libero dignissimos asperiores. Magni sequi exercitationem officiis eum unde. Saepe cupiditate facere laborum?</p>
+
+        <ul>
+        
+            <li>YO-YO HONEY SINGH</li>
+            <li>SUSHANT SINGH RAJPUT</li>
+            <li>YUVRAJ SINGH</li>
+        </ul>
+
+
+    
+    <!-- placeholder belongs to pseudo element selector -->
+
+</body>
+</html>

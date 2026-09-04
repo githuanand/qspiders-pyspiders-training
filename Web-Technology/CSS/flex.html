@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .item{
+            height: 100px;
+            width: 100px;
+            background-color: teal;
+            border: 2px dashed black;
+            font-size: 50px;
+            color: navy;
+        }
+        #main{
+            display: flex;
+            height: 100vh;
+            /*
+            flex-direction: column-reverse;
+            flex-direction: row-reverse;
+            */
+
+            /*
+            justify-content: center;
+            justify-content: end;
+            justify-content: space-between;
+            justify-content: space-around;
+            justify-content: space-evenly;
+            */
+            
+           /*
+            flex-direction: column;
+            flex-direction: row;
+            align-items: end; 
+            */
+
+            /*
+            flex-wrap: wrap;
+            flex-wrap: wrap-reverse;
+            flex-wrap: nowrap;
+            */
+
+            /*
+            align-content: start;
+            align-content: end;
+            align-content: center;
+            align-content: space-between;
+            align-content: space-around;
+            align-content: space-evenly;
+            */
+            flex-wrap: wrap;
+            align-content: space-evenly;
+            /*column-gap: 20px;
+            row-gap: 30px;*/
+            gap: 50px 10px;
+        }
+
+        .item-1{
+            /*
+            align-self: center; 
+            align-self: start;
+            align-self: end;
+            */
+
+            /*
+            flex-grow: 2;
+            flex-shrink: 2;
+            flex-basis: 200px;
+            */
+            order: 3;
+            flex: 2 2 200px;
+
+        }
+
+        .item-2{
+            order: 2;
+        }
+
+        .item-3{
+            order: 4;
+        }
+
+        .item-4{
+            align-self: flex-start;
+            /*
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 300px;
+            flex: 1 1 300px;
+            */
+            order: 1;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="main">
+    <div class="item" id="item-1">1</div>
+    <div class="item" id="item-2">2</div>
+    <div class="item" id="item-3">3</div>
+    <div class="item" id="item-4">4</div>
+    <!-- <div class="item" id="item-5">5</div>
+    <div class="item" id="item-6">6</div>
+    <div class="item" id="item-7">7</div>
+    <div class="item" id="item-8">8</div> -->
+    </div>
+
+</body>
+</html>

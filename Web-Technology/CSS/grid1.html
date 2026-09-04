@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        */
+
+        #grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 100px); /* 3 equal columns */
+            grid-template-rows: repeat(3, 100px);    /* 3 equal rows */
+            grid-template-areas: 
+                "item1      item2       item3"
+                "item4      item5       item6"
+                "item7      item8       item9";
+
+             /* gap: 10px; Space between grid items */
+        }
+
+        .item {
+            background-color: blue;
+            color: white;
+            font-size: 30px;
+        }
+        #item-1 {
+            grid-area: item1;
+        }
+        #item-2 {
+            grid-area: item2;
+        }
+        #item-3 {
+            grid-area: item3;
+        }
+        #item-4 {
+            grid-area: item4;
+        }
+        #item-5 {
+            grid-area: item5;
+        }
+        #item-6 {
+            grid-area: item6;
+        }
+        #item-7 {
+            grid-area: item7;
+        }
+        #item-8 {
+            grid-area: item8;
+        }
+        #item-9 {
+            grid-area: item9;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="grid-container">
+        <div class="item" id="item-1">1</div>
+        <div class="item" id="item-2">2</div>
+        <div class="item" id="item-3">3</div>
+        <div class="item" id="item-4">4</div>
+        <div class="item" id="item-5">5</div>
+        <div class="item" id="item-6">6</div>
+        <div class="item" id="item-7">7</div>
+        <div class="item" id="item-8">8</div>
+        <div class="item" id="item-9">9</div>
+    </div>
+</body>
+</html>

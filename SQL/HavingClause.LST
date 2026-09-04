@@ -1,0 +1,201 @@
+SQL> --1
+SQL> select count(*),deptno,empno
+  2  from emp
+  3  where job='CLERK'
+  4  Group by deptno
+  5  having count(*)>=2;
+select count(*),deptno,empno
+                       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> select count(*),deptno
+  2  from emp
+  3  where job='CLERK'
+  4  Group by deptno
+  5  having count(*)>=2;
+
+  COUNT(*)     DEPTNO                                                           
+---------- ----------                                                           
+         2         20                                                           
+
+SQL> --2
+SQL> select count(*),sum(sal)
+  2  from emp
+  3  group by deptno
+  4  having deptno>=4;
+
+  COUNT(*)   SUM(SAL)                                                           
+---------- ----------                                                           
+         6       9400                                                           
+         5      10875                                                           
+         3       8750                                                           
+
+SQL> --3
+SQL> select count(*),job
+  2  from emp
+  3  where sal>1200
+  4  group by job
+  5  having sal>1200;
+having sal>1200
+       *
+ERROR at line 5:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> select count(*)
+  2  from emp
+  3  ;
+
+  COUNT(*)                                                                      
+----------                                                                      
+        14                                                                      
+
+SQL> select count(*),job
+  2  from emp
+  3  group by deptno
+  4  having sal>1200;
+having sal>1200
+       *
+ERROR at line 4:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> select sal
+  2  from emp
+  3  group by deptno
+  4  having sal>1200;
+having sal>1200
+       *
+ERROR at line 4:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> select count(*),deptno
+  2  from emo
+  3  ;
+from emo
+     *
+ERROR at line 2:
+ORA-00942: table or view does not exist 
+
+
+SQL> --3
+SQL> select count(*),deptno
+  2  from emp
+  3  group by deptno
+  4  having sal>1200;
+having sal>1200
+       *
+ERROR at line 4:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> --3
+SQL> select count(*),sal
+  2  from emp
+  3  group by sal
+  4  ;
+
+  COUNT(*)        SAL                                                           
+---------- ----------                                                           
+         1       2450                                                           
+         1       5000                                                           
+         1       1300                                                           
+         2       1250                                                           
+         1       2850                                                           
+         1       2975                                                           
+         1       1100                                                           
+         2       3000                                                           
+         1        800                                                           
+         1       1600                                                           
+         1       1500                                                           
+
+  COUNT(*)        SAL                                                           
+---------- ----------                                                           
+         1        950                                                           
+
+12 rows selected.
+
+SQL> --3
+SQL> select count(*)
+  2  ,sal
+  3  from emp
+  4  group by sal
+  5  having sal>1200;
+
+  COUNT(*)        SAL                                                           
+---------- ----------                                                           
+         1       2450                                                           
+         1       5000                                                           
+         1       1300                                                           
+         2       1250                                                           
+         1       2850                                                           
+         1       2975                                                           
+         2       3000                                                           
+         1       1600                                                           
+         1       1500                                                           
+
+9 rows selected.
+
+SQL> --4
+SQL> select count(*),deptno
+  2  from emp
+  3  where job='MANAGER'
+  4  GROUP BY deptno
+  5  having count(*)=2;
+
+no rows selected
+
+SQL> --3
+SQL> select count(*),sal
+  2  from emp
+  3  group by sal
+  4  having sal>1200,sum(sal)>3800;
+having sal>1200,sum(sal)>3800
+               *
+ERROR at line 4:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> select count(*),sum(sal)
+  2  from emp
+  3  group by sal
+  4  having couny(*)=2 and sum(sal)>3800;
+having couny(*)=2 and sum(sal)>3800
+             *
+ERROR at line 4:
+ORA-00936: missing expression 
+
+
+SQL> select count(*),sum(sal)
+  2  from emp
+  3  group by sal
+  4  having count(*)=2 and sum(sal)>3800;
+
+  COUNT(*)   SUM(SAL)                                                           
+---------- ----------                                                           
+         2       6000                                                           
+
+SQL> --5
+SQL> select count(*),job,max(sal)
+  2  from emp
+  3  group by job
+  4  having max(sal)>2600;
+
+  COUNT(*) JOB         MAX(SAL)                                                 
+---------- --------- ----------                                                 
+         1 PRESIDENT       5000                                                 
+         3 MANAGER         2975                                                 
+         2 ANALYST         3000                                                 
+
+SQL> --6
+SQL> select count(*)
+  2  from emp
+  3  group by empno
+  4  having count(*)>=4;
+
+no rows selected
+
+SQL> spool off;

@@ -1,0 +1,398 @@
+SQL> --1.WAQTD NUMBER OF EMPLOYEES WORKING IN EACH DEPARTEMENT EXCEPT PRESIDENT.
+SQL> Select count(*),deptno
+  2  from emp
+  3  where JOB NOT IN('PRESIDENT')
+  4  Group by dept no;
+Group by dept no
+              *
+ERROR at line 4:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> Select count(*),deptno
+  2  from emp
+  3  where JOB NOT IN('PRESIDENT')
+  4  Group By deptno;
+
+  COUNT(*)     DEPTNO                                                           
+---------- ----------                                                           
+         6         30                                                           
+         5         20                                                           
+         2         10                                                           
+
+SQL> 2.WAQTD TOTAL SALARY NEEDED TO PAY ALL THE EMPLOYEES IN EACH JOB.
+SP2-0734: unknown command beginning "2.WAQTD TO..." - rest of line ignored.
+SQL> --2.WAQTD TOTAL SALARY NEEDED TO PAY ALL THE EMPLOYEES IN EACH JOB.
+SQL> select count(*),sal,job
+  2  from emp
+  3  group by empno;
+select count(*),sal,job
+                *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> select count(*),sal,job
+  2  ;
+
+*
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> select count(*),sal
+  2  from emp
+  3  where ;
+where 
+     *
+ERROR at line 3:
+ORA-00936: missing expression 
+
+
+SQL> select Sum(sal),Count(*)
+  2  from emp
+  3  group by sal;
+
+  SUM(SAL)   COUNT(*)                                                           
+---------- ----------                                                           
+      2450          1                                                           
+      5000          1                                                           
+      1300          1                                                           
+      2500          2                                                           
+      2850          1                                                           
+      2975          1                                                           
+      1100          1                                                           
+      6000          2                                                           
+       800          1                                                           
+      1600          1                                                           
+      1500          1                                                           
+
+  SUM(SAL)   COUNT(*)                                                           
+---------- ----------                                                           
+       950          1                                                           
+
+12 rows selected.
+
+SQL> set lines 200 pages 100;
+SQL> /
+
+  SUM(SAL)   COUNT(*)                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+      2450          1                                                                                                                                                                                   
+      5000          1                                                                                                                                                                                   
+      1300          1                                                                                                                                                                                   
+      2500          2                                                                                                                                                                                   
+      2850          1                                                                                                                                                                                   
+      2975          1                                                                                                                                                                                   
+      1100          1                                                                                                                                                                                   
+      6000          2                                                                                                                                                                                   
+       800          1                                                                                                                                                                                   
+      1600          1                                                                                                                                                                                   
+      1500          1                                                                                                                                                                                   
+       950          1                                                                                                                                                                                   
+
+12 rows selected.
+
+SQL> --3.WAQTD NUMBER OF EMPLOYEEES WORKING AS MANAGER IN EACH DEPARTMENT .
+SQL> select count(*),empno
+  2  from emp
+  3  where job='MANAGER'
+  4  GROUP BY deptno;
+select count(*),empno
+                *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> select count(*),deptno
+  2  from emp
+  3  where job='MANAGER'
+  4  group by deptno;
+
+  COUNT(*)     DEPTNO                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+         1         30                                                                                                                                                                                   
+         1         20                                                                                                                                                                                   
+         1         10                                                                                                                                                                                   
+
+SQL> select count(*),empno
+  2  from emp
+  3  where job='MANAGER'
+  4  GROUP BY empno;
+
+  COUNT(*)      EMPNO                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+         1       7566                                                                                                                                                                                   
+         1       7698                                                                                                                                                                                   
+         1       7782                                                                                                                                                                                   
+
+SQL> -- 1st is correct
+SQL> --4.4.WAQTD AVG SALARY NEEDED TO PAY ALL THE EMPLOYEES IN EACH DEPARTMENT EXCLUDING THE EMPLOYEES OF DEPTNO 20.
+SQL> select deptno,AVG(SAL)
+  2  FROM EMP
+  3  WHERE DEPT NO NOT IN 20
+  4  GROUP BY DEPTNO;
+WHERE DEPT NO NOT IN 20
+           *
+ERROR at line 3:
+ORA-00920: invalid relational operator 
+
+
+SQL> SELECT DEPTNO,AVG(SAL)
+  2  FROM EMP
+  3  WHERE DEPTNO NOT IN 20
+  4  GROUP BY DEPTNO;
+
+    DEPTNO   AVG(SAL)                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+        30 1566.66667                                                                                                                                                                                   
+        10 2916.66667                                                                                                                                                                                   
+
+SQL> --5.WAQTD NUMBER OF EMPLOYEES HAVING CHARACTER 'A' IN THEIR NAMES IN EACH JOB .
+SQL> SELECT COUNT(*),JOB
+  2  FROM EMP
+  3  WHERE ENAME LIKE'%A%'
+  4  GROUP  BY JOB;
+
+  COUNT(*) JOB                                                                                                                                                                                          
+---------- ---------                                                                                                                                                                                    
+         3 SALESMAN                                                                                                                                                                                     
+         2 CLERK                                                                                                                                                                                        
+         2 MANAGER                                                                                                                                                                                      
+
+SQL> --6.6.WAQTD NUMBER OF EMPLOYEES AND AVG SALARY NEEDED TO PAY THE EMPLOYEES WHO SALARY IN GREATER THAN 2000 IN EACH DEPT.
+SQL> SELECT DEPTNO,COUNT(*),AVG(SAL) FROM EMP
+  2  WHERE SAL>2000
+  3  GROUP BY DEPTNO;
+
+    DEPTNO   COUNT(*)   AVG(SAL)                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+        30          1       2850                                                                                                                                                                        
+        20          3 2991.66667                                                                                                                                                                        
+        10          2       3725                                                                                                                                                                        
+
+SQL> --7.WAQDTD TOTAL SALARY NEEDED TO PAY AND NUMBER OF SALESMANS IN EACH DEPT.
+SQL> SELECT DEPTNO,COUNT(*),SUM(SAL) FROM EMP
+  2  WHERE JOB='SALESMAN'
+  3  GROUP BY DEPTNO;
+
+    DEPTNO   COUNT(*)   SUM(SAL)                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+        30          4       5600                                                                                                                                                                        
+
+SQL> --8.8.WAQTD NUMBER OF EMPLOYEES WITH THEIR MAXIMUM SALARIES IN EACH JOB.
+SQL> SELECT JOB,COUNT(*),MAX(SAL)
+  2  FROM EMP
+  3  GROUP BY JOB;
+
+JOB         COUNT(*)   MAX(SAL)                                                                                                                                                                         
+--------- ---------- ----------                                                                                                                                                                         
+CLERK              4       1300                                                                                                                                                                         
+SALESMAN           4       1600                                                                                                                                                                         
+PRESIDENT          1       5000                                                                                                                                                                         
+MANAGER            3       2975                                                                                                                                                                         
+ANALYST            2       3000                                                                                                                                                                         
+
+SQL> --9.WAQTD MAXIMUM SALARIES GIVEN TO AN EMPLOYEE WORKING IN EACH DEPT.
+SQL> SELECT MAX(SAL),COUNT(*),DEPTNO
+  2  FROM EMP
+  3  GROUP BY DEPTNO;
+
+  MAX(SAL)   COUNT(*)     DEPTNO                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+      2850          6         30                                                                                                                                                                        
+      3000          5         20                                                                                                                                                                        
+      5000          3         10                                                                                                                                                                        
+
+SQL> --10.WAQTD NUMBER OF TIMES THE SALARIES PRESENT IN EMPLOYEE TABLE .
+SQL> SELECT COUNT(*),SAL474\
+  2  ;
+SELECT COUNT(*),SAL474\
+                      *
+ERROR at line 1:
+ORA-00911: invalid character 
+
+
+SQL> SELECT SAL,COUNT(*)
+  2  FROM EMP
+  3  GROUP BY SAL;
+
+       SAL   COUNT(*)                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+      2450          1                                                                                                                                                                                   
+      5000          1                                                                                                                                                                                   
+      1300          1                                                                                                                                                                                   
+      1250          2                                                                                                                                                                                   
+      2850          1                                                                                                                                                                                   
+      2975          1                                                                                                                                                                                   
+      1100          1                                                                                                                                                                                   
+      3000          2                                                                                                                                                                                   
+       800          1                                                                                                                                                                                   
+      1600          1                                                                                                                                                                                   
+      1500          1                                                                                                                                                                                   
+       950          1                                                                                                                                                                                   
+
+12 rows selected.
+
+SQL> --11.11.WAQTD NUMBER OF EMPLOYEES HIRED ON THE SAME DAY INTO THE SAME DEPARTMENT
+SQL> SELECT COUNT(*),HIREDATE,DEPTNO
+  2  FROM EMP
+  3  GROUP BY HIREDATE,DEPTNO;
+
+  COUNT(*) HIREDATE      DEPTNO                                                                                                                                                                         
+---------- --------- ----------                                                                                                                                                                         
+         1 22-FEB-81         30                                                                                                                                                                         
+         1 01-MAY-81         30                                                                                                                                                                         
+         1 08-SEP-81         30                                                                                                                                                                         
+         1 28-SEP-81         30                                                                                                                                                                         
+         1 20-FEB-81         30                                                                                                                                                                         
+         1 23-JAN-82         10                                                                                                                                                                         
+         1 17-DEC-80         20                                                                                                                                                                         
+         1 17-NOV-81         10                                                                                                                                                                         
+         1 19-APR-87         20                                                                                                                                                                         
+         1 23-MAY-87         20                                                                                                                                                                         
+         1 03-DEC-81         20                                                                                                                                                                         
+         1 02-APR-81         20                                                                                                                                                                         
+         1 09-JUN-81         10                                                                                                                                                                         
+         1 03-DEC-81         30                                                                                                                                                                         
+
+14 rows selected.
+
+SQL> --12.WAQTD NUMBER OF EMPLOYEES GETTING THE SAME SALARY IN THE SAME DEPARTMENT
+SQL> SELECT COUNT(*),SAL
+  2  FROM EMP
+  3  GROUP BY SAL;
+
+  COUNT(*)        SAL                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+         1       2450                                                                                                                                                                                   
+         1       5000                                                                                                                                                                                   
+         1       1300                                                                                                                                                                                   
+         2       1250                                                                                                                                                                                   
+         1       2850                                                                                                                                                                                   
+         1       2975                                                                                                                                                                                   
+         1       1100                                                                                                                                                                                   
+         2       3000                                                                                                                                                                                   
+         1        800                                                                                                                                                                                   
+         1       1600                                                                                                                                                                                   
+         1       1500                                                                                                                                                                                   
+         1        950                                                                                                                                                                                   
+
+12 rows selected.
+
+SQL> --12.
+SQL> SELECT COUNT(*),SAL,DEPTNO
+  2  FROM EMP
+  3  GROUP BY SAL,DEPTNO;
+
+  COUNT(*)        SAL     DEPTNO                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         1       5000         10                                                                                                                                                                        
+         1       1300         10                                                                                                                                                                        
+         1       1600         30                                                                                                                                                                        
+         2       1250         30                                                                                                                                                                        
+         1       2450         10                                                                                                                                                                        
+         2       3000         20                                                                                                                                                                        
+         1        800         20                                                                                                                                                                        
+         1       2850         30                                                                                                                                                                        
+         1       1500         30                                                                                                                                                                        
+         1       1100         20                                                                                                                                                                        
+         1        950         30                                                                                                                                                                        
+         1       2975         20                                                                                                                                                                        
+
+12 rows selected.
+
+SQL> --13.
+SQL> --13.WAQTD NUMBER OF EMPLOYEES HAVING THE SAME NAME IN THE SAME DEPARTMENT
+SQL> SELECT COUNT(*),ENAME,DEPTNO
+  2  FROM EMP
+  3  GROUP BY ENAME=DEPTNO;
+GROUP BY ENAME=DEPTNO
+              *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> ED;
+Wrote file afiedt.buf
+
+  1  SELECT COUNT(*),ENAME,DEPTNO
+  2  FROM EMP
+  3* GROUP BY ENAME,DEPTNO
+SQL> /
+
+  COUNT(*) ENAME          DEPTNO                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         1 SMITH              20                                                                                                                                                                        
+         1 JONES              20                                                                                                                                                                        
+         1 FORD               20                                                                                                                                                                        
+         1 CLARK              10                                                                                                                                                                        
+         1 SCOTT              20                                                                                                                                                                        
+         1 TURNER             30                                                                                                                                                                        
+         1 JAMES              30                                                                                                                                                                        
+         1 KING               10                                                                                                                                                                        
+         1 ADAMS              20                                                                                                                                                                        
+         1 BLAKE              30                                                                                                                                                                        
+         1 MILLER             10                                                                                                                                                                        
+         1 ALLEN              30                                                                                                                                                                        
+         1 WARD               30                                                                                                                                                                        
+         1 MARTIN             30                                                                                                                                                                        
+
+14 rows selected.
+
+SQL> --1414.WAQTD NUMBER OF EMPLOYEES GETTING THE SAME SALARY IN THE SAME DEPARTMENT AND HAVING THE SAME NAME .
+SQL> SELECT COUNT(*),SAL,ENAME,DEPTNO
+  2  FROM EMP
+  3  GROUP BY SAL,DEPTNO,ENAME;
+
+  COUNT(*)        SAL ENAME          DEPTNO                                                                                                                                                             
+---------- ---------- ---------- ----------                                                                                                                                                             
+         1       2975 JONES              20                                                                                                                                                             
+         1       2850 BLAKE              30                                                                                                                                                             
+         1       3000 FORD               20                                                                                                                                                             
+         1       1300 MILLER             10                                                                                                                                                             
+         1       1250 MARTIN             30                                                                                                                                                             
+         1       5000 KING               10                                                                                                                                                             
+         1       2450 CLARK              10                                                                                                                                                             
+         1        950 JAMES              30                                                                                                                                                             
+         1        800 SMITH              20                                                                                                                                                             
+         1       1600 ALLEN              30                                                                                                                                                             
+         1       1250 WARD               30                                                                                                                                                             
+         1       3000 SCOTT              20                                                                                                                                                             
+         1       1100 ADAMS              20                                                                                                                                                             
+         1       1500 TURNER             30                                                                                                                                                             
+
+14 rows selected.
+
+SQL> --14
+SQL> --DONE
+SQL> --15.
+SQL> 15.WAQTD NUMBER OF EMPLOYEES GETTING THE SAME SALARY IN THE SAME DEPARTMENT AND HIRED ON THE SAME DAY . ;
+SP2-0734: unknown command beginning "15.WAQTD N..." - rest of line ignored.
+SQL> --15.WAQTD NUMBER OF EMPLOYEES GETTING THE SAME SALARY IN THE SAME DEPARTMENT AND HIRED ON THE SAME DAY . 
+SQL> 
+SQL> SELECT COUNT(*),SAL,DEPTNO,HIREDATE
+  2  FROM EMP
+  3  GROUP BY SAL,DEPTNO,HIREDATE;
+
+  COUNT(*)        SAL     DEPTNO HIREDATE                                                                                                                                                               
+---------- ---------- ---------- ---------                                                                                                                                                              
+         1       2450         10 09-JUN-81                                                                                                                                                              
+         1       1500         30 08-SEP-81                                                                                                                                                              
+         1       3000         20 03-DEC-81                                                                                                                                                              
+         1       2850         30 01-MAY-81                                                                                                                                                              
+         1       2975         20 02-APR-81                                                                                                                                                              
+         1        950         30 03-DEC-81                                                                                                                                                              
+         1       1600         30 20-FEB-81                                                                                                                                                              
+         1       1250         30 22-FEB-81                                                                                                                                                              
+         1       3000         20 19-APR-87                                                                                                                                                              
+         1        800         20 17-DEC-80                                                                                                                                                              
+         1       5000         10 17-NOV-81                                                                                                                                                              
+         1       1100         20 23-MAY-87                                                                                                                                                              
+         1       1300         10 23-JAN-82                                                                                                                                                              
+         1       1250         30 28-SEP-81                                                                                                                                                              
+
+14 rows selected.
+
+SQL> 
+SQL> SPOOL OFF;

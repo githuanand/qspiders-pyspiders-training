@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pseudo Elements Demo</title>
+  <style>
+    /* First letter in blue */
+    p::first-letter {
+      color: blue;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    /* First line in red */
+    p::first-line {
+      color: red;
+    }
+
+    /* Add content before paragraph */
+    p::before {
+      content: "👉 Welcome => ";
+      color: green;
+      font-weight: bold;
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    /* Add content after paragraph */
+    p::after {
+      content: " ✅ Thank You!";
+      color: purple;
+      font-weight: bold;
+      margin-left: 8px;
+    }
+
+    /* Customize list markers */
+    li::marker {
+      content: "💗 ";
+      font-size: 18px;
+      color: crimson;
+    }
+
+    /* Text selection style */
+    p::selection {
+      color: yellow;
+      background-color: black;
+    }
+  </style>
+</head>
+<body>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, eligendi. 
+    Asperiores voluptatibus id animi sint earum fuga facere, molestias neque dolore porro 
+    dignissimos, obcaecati libero quod, magni eos consequatur! Commodi quis quo totam numquam 
+    blanditiis est architecto dicta aliquid molestiae eos minus corporis voluptate, ad ex soluta 
+    necessitatibus perspiciatis dolorum eaque dolorem repellat modi libero dolore.
+  </p>
+
+  <ul>
+    <li>YO-YO HONEY SINGH</li>
+    <li>SUSHANT SINGH RAJPUT</li>
+    <li>YUVRAJ SINGH</li>
+  </ul>
+</body>
+</html>

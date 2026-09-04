@@ -1,0 +1,9 @@
+SQL> --1) WQD employee name, salary, manger number only for those who ARE
+SQL> eraning salary more then 500rs.
+SP2-0734: unknown command beginning "eraning sa..." - rest of line ignored.
+SQL> --1) WQD employee name, salary, manger number only for those who ARE
+SQL> --1) WQD employee name, salary, manger number only for those who ARE
+SQL> eraning salary more then 500rs.;
+SP2-0734: unknown command beginning "eraning sa..." - rest of line ignored.
+SQL> clear screen;
+SQL> spool file:///C:/Users/ANAND/OneDrive/Desktop/SQL_ASSIGNMENTS/Operator_Queries_70_assign.LST

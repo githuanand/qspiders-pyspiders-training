@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+{% block content %}
+<center>
+    <h1>WELCOME TO MY HOME</h1>
+<div class="search">
+    {% for i in articles %}
+        <div class="article">
+        <h2>{{ i.id }}</h2>
+        <h2>{{ i.title }}</h2>
+        <a href="{% url 'read' i.id %}">Read</a>
+        </div>
+    {% endfor %}
+    </div>
+</center>
+
+{% endblock content %}

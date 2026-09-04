@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cricket Tournament Registration</title>
+</head>
+<body>
+  <h2>Cricket Tournament Registration</h2>
+  <form action="/register" method="post">
+    
+    <label>Full Name:</label>
+    <input type="text" name="full_name" required><br><br>
+
+    <label>Email:</label>
+    <input type="email" name="email" required><br><br>
+
+    <label>Phone:</label>
+    <input type="tel" name="phone" required><br><br>
+
+    <label>Age:</label>
+    <input type="number" name="age" min="10" max="60" required><br><br>
+
+    <label>Team Name:</label>
+    <input type="text" name="team_name" required><br><br>
+
+    <label>Player Role:</label>
+    <select name="role" required>
+      <option value="Batsman">Batsman</option>
+      <option value="Bowler">Bowler</option>
+      <option value="All-rounder">All-rounder</option>
+      <option value="Wicketkeeper">Wicketkeeper</option>
+    </select><br><br>
+
+    <label>Batting Style:</label>
+    <select name="batting_style">
+      <option value="Right-hand">Right-hand</option>
+      <option value="Left-hand">Left-hand</option>
+    </select><br><br>
+
+    <label>Bowling Style:</label>
+    <select name="bowling_style">
+      <option value="Right-arm Fast">Right-arm Fast</option>
+      <option value="Right-arm Spin">Right-arm Spin</option>
+      <option value="Left-arm Fast">Left-arm Fast</option>
+      <option value="Left-arm Spin">Left-arm Spin</option>
+      <option value="None">None</option>
+    </select><br><br>
+
+    <label>Upload Photo:</label>
+    <input type="file" name="photo"><br><br>
+
+    <label>
+      <input type="checkbox" name="agree" required> I agree to the rules & regulations
+    </label><br><br>
+
+    <button type="submit">Register</button>
+  </form>
+</body>
+</html>

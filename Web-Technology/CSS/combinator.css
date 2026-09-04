@@ -1,0 +1,64 @@
+/* DESCENDENT SELECTOR
+div h1{
+    color:red;
+}
+
+div h2{
+    color:tomato;
+}
+
+article h1{
+    background-color: black;
+}
+
+article h2{
+    background-color: blue;
+}
+
+ */
+
+
+
+/* div h1,h2{
+    color:red;
+
+}
+
+div h2{
+    color:aqua;
+} */
+
+/* child selector */
+
+div>h1{
+    background-color: blue;
+}
+
+article>h2{
+    background-color: brown;
+}
+
+/* adjacent sibling selector */
+
+div+p{
+    background-color: pink;
+}
+
+/* general sibling selector */
+
+div~h1{
+    background-color: tomato;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+ 

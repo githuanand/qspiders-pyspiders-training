@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> <!-- Sets character encoding to UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Makes page responsive -->
+    <title>Forms Validation in HTML</title> <!-- Title shown in browser tab -->
+</head>
+<body>
+
+    <!-- Form starts here -->
+
+    <form action="" method="" novalidate autocomplete="off">
+        <!-- action: where form data is sent (currently empty)
+             method: GET/POST request method (currently empty)
+             novalidate: disables default HTML validation
+             autocomplete="off": stops browser from auto-filling -->
+
+        <!-- Username input with minlength & maxlength -->
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" minlength="3" maxlength="8" >
+        <br><br>
+
+        <!-- Password field with autofocus (cursor starts here on page load) -->
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" autofocus >
+        <br><br>
+
+        <!-- Number input restricted to between 18 and 60 -->
+        age: <input type="number" min="18" max="60">
+        <br><br>
+    
+        <!-- Example of readonly input (cannot edit, only view) -->
+        fname: <input type="text" placeholder="Created By Anand Mohan Jha" readonly>
+
+        <!-- Dropdown with size=2 (shows 2 options at a time) -->
+        <select size="2">
+            <option value="volvo">Volvo</option>
+            <option value="EV">EV</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+        </select> 
+        <br><br>
+
+        <!-- Input must be only digits (\d+) -->
+        kolkata: <input type="text" pattern="\d+" >
+        <br><br>
+
+        <!-- Phone number must follow ###-###-#### format -->
+        ph.no: <input type="tel" pattern="\d{3}-\d{3}-\d{4}">
+        <br><br>
+
+        <!-- Submit button -->
+        <button type="submit">LogIn</button>
+    </form>
+    <!-- Form ends here -->
+
+</body>
+</html>

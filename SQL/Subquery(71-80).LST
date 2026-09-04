@@ -1,0 +1,169 @@
+SQL> --71
+SQL> --71.WAQTD SMITHS REPORTING MANAGER'S NAME
+SQL> select ename
+  2  from emp
+  3  where empno in
+  4  (select mgr
+  5  from emp
+  6  where ename='SMITH');
+
+ENAME                                                                           
+----------                                                                      
+FORD                                                                            
+
+SQL> --72
+SQL> --72.WAQTD ADAMS MANAGER'S MANAGER NAME
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE EMPNO =
+  4  (SELECT MGR
+  5  FROM EMP
+  6  WHERE EMPNO =
+  7  (SELECT MGR
+  8  FROM EMP
+  9  WHERE ENAME='ADAMS'));
+
+ENAME                                                                           
+----------                                                                      
+JONES                                                                           
+
+SQL> --73
+SQL> --73.WAQTD DNAME OF JONES MANAGER
+SQL> SELECT DNAME FROM DEPT
+  2  WHERE DEPTNO IN
+  3  (SELECT DEPTNO FROM EMP
+  4  WHERE EMPNO IN
+  5  (SELECT MGR FROM EMP
+  6  WHERE ENAME = 'JONES'));
+
+DNAME                                                                           
+--------------                                                                  
+ACCOUNTING                                                                      
+
+SQL> --74
+SQL> --74.WAQTD MILLER'S MANAGER'S SALARY
+SQL> 
+SQL> SELECT SAL FROM EMP
+  2  WHERE EMPNO IN
+  3  (SELECT MGR FROM EMP
+  4  WHERE ENAME='MILLER');
+
+       SAL                                                                      
+----------                                                                      
+      2450                                                                      
+
+SQL> --75
+SQL> --75
+SQL> --75.WAQTD LOC OF SMITH'S MANAGER'S MANAGER.
+SQL> SELECT LOC FROM DEPT
+  2  WHERE DEPTNO IN
+  3  (SELECT DEPTNO FROM EMP
+  4  WHERE EMPNO IN
+  5  (SELECT MGR FROM EMP
+  6  WHERE EMPNO IN
+  7  (SELECT MGR FROM EMP
+  8  WHERE ENAME='SMITH')));
+
+LOC                                                                             
+-------------                                                                   
+DALLAS                                                                          
+
+SQL> --76 76.WAQTD NAME OF THE EMPLOYEES REPORTING TO BLAKE
+SQL> SELECT ENAME FROM EMP
+  2  ;
+
+ENAME                                                                           
+----------                                                                      
+SMITH                                                                           
+ALLEN                                                                           
+WARD                                                                            
+JONES                                                                           
+MARTIN                                                                          
+BLAKE                                                                           
+CLARK                                                                           
+SCOTT                                                                           
+KING                                                                            
+TURNER                                                                          
+ADAMS                                                                           
+
+ENAME                                                                           
+----------                                                                      
+JAMES                                                                           
+FORD                                                                            
+MILLER                                                                          
+
+14 rows selected.
+
+SQL> SELECT ENAME FROM EMP WHERE MGR IN (SELECT EMPNO FROM EMP WHERE ENAME='BLAKE');
+
+ENAME                                                                           
+----------                                                                      
+ALLEN                                                                           
+WARD                                                                            
+MARTIN                                                                          
+TURNER                                                                          
+JAMES                                                                           
+
+SQL> --7
+SQL> --77
+SQL> --77.WAQTD NUMBER OF EMPLPOYEES REPORTING TO KING
+SQL> SELECT COUNT(*) FROM EMP WHERE MGR IN (SELECT EMPNO FROM EMP WHERE ENAME='KING');
+
+  COUNT(*)                                                                      
+----------                                                                      
+         3                                                                      
+
+SQL> --78
+SQL> --WAQTD DETAILS OF THE EMPLOYEES REPORTING TO JONES
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE MGR IN
+  4  ( SELECT EMPNO
+  5  FROM EMP
+  6  WHERE ENAME='JONES');
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                 
+        20                                                                      
+                                                                                
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                 
+        20                                                                      
+                                                                                
+
+SQL> SET LINES 200 PAGES 100;
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+
+SQL> --79
+SQL> --79.WAQTD ENAMES OF THE EMPLOYEES REPORTING TO BLAKE'S MANAGER
+SQL> SELECT ENAME FROM EMP WHERE MGR IN (SELECT EMPNO FROM EMP WHERE MGR IN (SELECT MGR FROM EMP WHERE ENAME='BLAKE'));
+
+ENAME                                                                                                                                                                                                   
+----------                                                                                                                                                                                              
+FORD                                                                                                                                                                                                    
+SCOTT                                                                                                                                                                                                   
+JAMES                                                                                                                                                                                                   
+TURNER                                                                                                                                                                                                  
+MARTIN                                                                                                                                                                                                  
+WARD                                                                                                                                                                                                    
+ALLEN                                                                                                                                                                                                   
+MILLER                                                                                                                                                                                                  
+
+8 rows selected.
+
+SQL> --80
+SQL> --WAQTD NUMBER OF EMPLOYEES REPORTING TO FORD'S MANAGER
+SQL> SELECT COUNT(*) FROM EMP WHERE MGR IN (SELECT EMPNO FROM EMP WHERE MGR IN (SELECT MGR FROM EMP WHERE ENAME='FORD'));
+
+  COUNT(*)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         2                                                                                                                                                                                              
+
+SQL> SPOOL OFF;

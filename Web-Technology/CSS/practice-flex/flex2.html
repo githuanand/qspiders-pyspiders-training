@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            display:flex;
+            flex-direction:row-reverse;
+            border:2px solid black;
+            width:300px;
+            height:100px;
+            align-items:center;
+            justify-content:center;
+            background-color:lightgray;
+            margin:20px;
+        }
+        .item{
+            border:2px solid red;
+            padding:10px;
+            background-color:lightblue;
+            font-size:20px;
+            font-weight:bold;
+            color:darkblue;
+            cursor:pointer;
+            user-select:none;
+            transition:background-color 0.3s, color 0.3s;
+        }
+        .item:hover{
+            background-color:blue;
+            color:white;
+        }
+        .item:active{
+            background-color:darkblue;
+            color:lightgray;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item">Home</div>
+    </div>
+</body>
+</html>

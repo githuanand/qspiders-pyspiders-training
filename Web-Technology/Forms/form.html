@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up Form</title>
+</head>
+<body>
+
+  <form action="" method="post" style="background-color:aqua; width: 300px; padding:10px;">
+    <fieldset style="border: 2px solid black; padding: 10px;">
+      <legend>Sign Up Form</legend>
+
+      <!-- First, Middle, Last Name -->
+      <label for="fname">First Name:</label>
+      <input type="text" id="fname" name="fname" required>
+      <br><br>
+
+      <label for="mname">Middle Name:</label>
+      <input type="text" id="mname" name="mname">
+      <br><br>
+
+      <label for="lname">Last Name:</label>
+      <input type="text" id="lname" name="lname" required>
+      <br><br>
+
+      <!-- DOB -->
+      <label for="dob">Date of Birth:</label>
+      <input type="datetime-local" id="dob" name="dob" required>
+      <br><br>
+
+      <!-- Phone -->
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" required>
+      <br><br>
+
+      <!-- Gmail -->
+      <label for="email">Gmail Address:</label>
+      <input type="email" id="email" name="email" required>
+      <br><br>
+
+      <!-- Address -->
+      <label for="address">Address:</label><br>
+      <textarea id="address" name="address" rows="4" cols="30"></textarea>
+      <br><br>
+
+      <!-- Gender -->
+      <label>Gender:</label><br>
+      <input type="radio" id="male" name="gender" value="Male" required>
+      <label for="male">Male</label><br>
+
+      <input type="radio" id="female" name="gender" value="Female">
+      <label for="female">Female</label><br>
+
+      <input type="radio" id="other" name="gender" value="Other">
+      <label for="other">Other</label>
+      <br><br>
+
+      <!-- Upload Document -->
+      <label for="upload">Upload Document:</label>
+      <input type="file" id="upload" name="upload" accept=".pdf,.doc,.jpg,.png">
+      <br><br>
+
+      <!-- Interests -->
+      <label>Interests:</label><br>
+      <input type="checkbox" id="coding" name="interest" value="Coding">
+      <label for="coding">Coding</label><br>
+
+      <input type="checkbox" id="music" name="interest" value="Music">
+      <label for="music">Music</label><br>
+
+      <input type="checkbox" id="sports" name="interest" value="Sports">
+      <label for="sports">Sports</label>
+      <br><br>
+
+      <!-- Courses -->
+      <label>Courses:</label><br>
+      <input type="checkbox" id="python" name="course" value="Python">
+      <label for="python">Python</label><br>
+
+      <input type="checkbox" id="java" name="course" value="Java">
+      <label for="java">Java</label><br>
+
+      <input type="checkbox" id="data" name="course" value="Data Analysis">
+      <label for="data">Data Analysis</label><br>
+
+      <input type="checkbox" id="selenium" name="course" value="Selenium">
+      <label for="selenium">Selenium</label><br>
+
+      <input type="checkbox" id="manual" name="course" value="Manual Testing">
+      <label for="manual">Manual Testing</label><br>
+
+      <input type="checkbox" id="webtech" name="course" value="Web Technologies">
+      <label for="webtech">Web Technologies</label>
+      <br><br>
+
+      <!-- Buttons -->
+      <button type="submit">Sign Up</button>
+      <button type="button">Login</button>
+      <button type="reset">Reset</button>
+    </fieldset>
+  </form>
+
+</body>
+</html>

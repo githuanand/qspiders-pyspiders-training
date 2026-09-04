@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags define character set and viewport for responsiveness -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Start of the form -->
+    <form action="">
+        <!-- Form heading -->
+        <h1>Login Form</h1>
+
+        <!-- Internal CSS for styling the form -->
+        <style>
+            form {
+                border: 2px solid black; /* Adds a black border around the form */
+                padding: 20px;           /* Space inside the form */
+                width: 350px;            /* Width of the form */
+            }
+        </style>
+
+        <!-- Email input field for username -->
+        <input type="email" name="email" placeholder="Enter your username" required><br><br>
+
+        <!-- Password input field -->
+        <input type="password" name="password" placeholder="Enter your password" required><br><br>
+
+        <!-- Dropdown menu for Frontend skills -->
+        <select name="skills" id="">
+            <optgroup label="Frontend">
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="js">JavaScript</option>
+                <option value="reactjs">ReactJs</option>
+            </optgroup>
+        </select>
+
+        <!-- Dropdown menu for Backend skills -->
+        <select name="skills" id="">
+            <optgroup label="Backend">
+                <option value="Python">Python</option>
+                <option value="Java">Java</option>
+                <option value="ruby">Ruby</option>
+                <option value="Nodejs">NodeJs</option>
+                <option value="Perl">Perl</option>
+            </optgroup>
+        </select>
+
+        <!-- Dropdown menu for Database skills -->
+        <select name="skills" id="">
+            <optgroup label="Database">
+                <option value="sql">sql</option>
+                <option value="postgresql">postgresql</option>
+                <option value="monogodb">mongodb</option>
+                <option value="GraphQl">GraphQl</option>
+            </optgroup>
+        </select>
+        <br><br>
+
+        <!-- Input field with datalist for skill suggestions -->
+        <input list="skill">
+        <datalist id="skill">
+            <option value="HTML">
+            <option value="CSS">
+            <option value="JavaScript">
+            <option value="ReactJs">
+            <option value="Python">
+            <option value="Java">
+            <option value="Ruby">
+            <option value="NodeJs">
+            <option value="Perl">
+            <option value="sql">
+            <option value="postgresql">
+            <option value="mongodb">
+            <option value="GraphQl">
+        </datalist>
+        <br><br>
+
+        <!-- Submit button for the form -->
+        <button type="submit">Login</button>
+    </form>
+    <!-- End of the form -->
+</body>
+</html>

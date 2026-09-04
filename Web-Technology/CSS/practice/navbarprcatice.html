@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown Navbar</title>
+    <style>
+        /* Reset default browser styles */
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        /* Navbar container */
+        nav {
+            width: 100%;
+            height: 75px;
+            background-color: aqua;
+        }
+
+        /* Main navbar list */
+        nav ul {
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+            height: inherit;
+            align-items: center;
+        }
+
+        /* Main nav items */
+        nav ul li {
+            font-size: 30px;
+            color: forestgreen;
+            position: relative; /* Needed for dropdown absolute positioning */
+        }
+
+        /* Hide dropdown menus initially */
+        nav ul li #drop-down {
+            display: none;
+            position: absolute;
+            /* top: 75px;  pushes dropdown below navbar */
+            left: 0;
+        }
+
+        /* Show dropdown on hover */
+        nav ul li:hover #drop-down {
+            display: block;
+        }
+
+        /* Dropdown menu structure */
+        nav ul li #drop-down ul {
+            display: block;
+            width: 200px;
+            border: 2px solid black;
+            cursor: pointer;
+        }
+
+        /* Dropdown items */
+        nav ul li #drop-down ul li {
+            padding: 10px;
+            border-bottom: 1px solid black;
+        }
+
+        /* Hover effect for dropdown items */
+        nav ul li #drop-down ul li:hover {
+            color: white;
+            background-color: black;
+        }
+
+        /* Different background colors for each dropdown */
+        #item1 #drop-down ul { background-color: gold; }
+        #item2 #drop-down ul { background-color: blanchedalmond; }
+        #item3 #drop-down ul { background-color: lightgreen; }
+        #item4 #drop-down ul { background-color: lightpink; }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <!-- Home Dropdown -->
+            <li id="item1">Home
+                <div id="drop-down">
+                    <ul>
+                        <li>JAVA</li>
+                        <li>PYTHON</li>
+                        <li>WEB TECH</li>
+                        <li>REACT</li>
+                        <li>DJANGO</li>
+                    </ul>
+                </div>
+            </li>
+
+            <!-- About Dropdown -->
+            <li id="item2">About
+                <div id="drop-down">
+                    <ul>
+                        <li>Our Team</li>
+                        <li>Our History</li>
+                        <li>Our Mission</li>
+                    </ul>
+                </div>
+            </li>
+
+            <!-- Contact Dropdown -->
+            <li id="item3">Contact
+                <div id="drop-down">
+                    <ul>
+                        <li>Email</li>
+                        <li>Phone</li>
+                        <li>Address</li>
+                    </ul>
+                </div>
+            </li>
+
+            <!-- Login Dropdown -->
+            <li id="item4">LogIn
+                <div id="drop-down">
+                    <ul>
+                        <li>Admin</li>
+                        <li>User</li>
+                        <li>Guest</li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</body>
+</html>

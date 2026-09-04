@@ -1,0 +1,145 @@
+SQL> SELECT * FROM TAB;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+DEPT                           TABLE                                            
+EMP                            TABLE                                            
+BONUS                          TABLE                                            
+SALGRADE                       TABLE                                            
+BIN$McqDMxulRemHV144KKiRnQ==$0 TABLE                                            
+BIN$WXd8R49lR7qHVuPLTJZ+rw==$0 TABLE                                            
+BIN$vShcryBKS7mZAn+3Rc7EaA==$0 TABLE                                            
+BIN$zgO9KWHrTs65U24Alt6/jg==$0 TABLE                                            
+BIN$3unByc5STeu2V/WS9ukMMw==$0 TABLE                                            
+
+9 rows selected.
+
+SQL> SELECT * FROM anand
+  2  ;
+SELECT * FROM anand
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select * from dual;
+
+D                                                                               
+-                                                                               
+X                                                                               
+
+SQL> select "Hello Worl"
+  2  from dual;
+select "Hello Worl"
+       *
+ERROR at line 1:
+ORA-00904: "Hello Worl": invalid identifier 
+
+
+SQL> select 2+2
+  2  from dual;
+
+       2+2                                                                      
+----------                                                                      
+         4                                                                      
+
+SQL> -- in single quotes hello world
+SQL> select 'hello world'
+  2  from dual;
+
+'HELLOWORLD                                                                     
+-----------                                                                     
+hello world                                                                     
+
+SQL> select 'Mr' || ename
+  2  from emp;
+
+'MR'||ENAME                                                                     
+------------                                                                    
+MrSMITH                                                                         
+MrALLEN                                                                         
+MrWARD                                                                          
+MrJONES                                                                         
+MrMARTIN                                                                        
+MrBLAKE                                                                         
+MrCLARK                                                                         
+MrSCOTT                                                                         
+MrKING                                                                          
+MrTURNER                                                                        
+MrADAMS                                                                         
+
+'MR'||ENAME                                                                     
+------------                                                                    
+MrJAMES                                                                         
+MrFORD                                                                          
+MrMILLER                                                                        
+
+14 rows selected.
+
+SQL> set pages 100 lines 100;
+SQL> /
+
+'MR'||ENAME                                                                                         
+------------                                                                                        
+MrSMITH                                                                                             
+MrALLEN                                                                                             
+MrWARD                                                                                              
+MrJONES                                                                                             
+MrMARTIN                                                                                            
+MrBLAKE                                                                                             
+MrCLARK                                                                                             
+MrSCOTT                                                                                             
+MrKING                                                                                              
+MrTURNER                                                                                            
+MrADAMS                                                                                             
+MrJAMES                                                                                             
+MrFORD                                                                                              
+MrMILLER                                                                                            
+
+14 rows selected.
+
+SQL> select ename||job
+  2  from emp;
+
+ENAME||JOB                                                                                          
+-------------------                                                                                 
+SMITHCLERK                                                                                          
+ALLENSALESMAN                                                                                       
+WARDSALESMAN                                                                                        
+JONESMANAGER                                                                                        
+MARTINSALESMAN                                                                                      
+BLAKEMANAGER                                                                                        
+CLARKMANAGER                                                                                        
+SCOTTANALYST                                                                                        
+KINGPRESIDENT                                                                                       
+TURNERSALESMAN                                                                                      
+ADAMSCLERK                                                                                          
+JAMESCLERK                                                                                          
+FORDANALYST                                                                                         
+MILLERCLERK                                                                                         
+
+14 rows selected.
+
+SQL> select ename || '---->' || job
+  2  from emp;
+
+ENAME||'---->'||JOB                                                                                 
+------------------------                                                                            
+SMITH---->CLERK                                                                                     
+ALLEN---->SALESMAN                                                                                  
+WARD---->SALESMAN                                                                                   
+JONES---->MANAGER                                                                                   
+MARTIN---->SALESMAN                                                                                 
+BLAKE---->MANAGER                                                                                   
+CLARK---->MANAGER                                                                                   
+SCOTT---->ANALYST                                                                                   
+KING---->PRESIDENT                                                                                  
+TURNER---->SALESMAN                                                                                 
+ADAMS---->CLERK                                                                                     
+JAMES---->CLERK                                                                                     
+FORD---->ANALYST                                                                                    
+MILLER---->CLERK                                                                                    
+
+14 rows selected.
+
+SQL> spool off;

@@ -1,0 +1,246 @@
+SQL> 
+SQL> --Query 1: Find the name of employees who have 'A' in their name and earn a salary in department 10.
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%A%'
+  4  AND DEPTNO = 10;
+
+ENAME                                                                                                                                                                                                   
+----------                                                                                                                                                                                              
+CLARK                                                                                                                                                                                                   
+
+SQL> --2 Query 2: Find the ename and dname of all employees who work in 'NEW YORK' and are working as 'MANAGER' in department 30.
+SQL> 
+SQL> SELECT E.ENAME, D.DNAME
+  2  FROM EMP E
+  3  JOIN DEPT D ON E.DEPTNO = D.DEPTNO
+  4  WHERE D.LOC = 'NEW YORK'
+  5  AND E.JOB = 'MANAGER'
+  6  AND E.DEPTNO = 30;
+
+no rows selected
+
+SQL> --3 Query 3: Find the ename and manager's name for all employees whose manager is an actual manager, and the employee should earn a salary between 1000 and 3000.
+SQL> 
+SQL> SELECT E.ENAME AS EMPLOYEE_NAME, M.ENAME AS MANAGER_NAME
+  2  FROM EMP E
+  3  JOIN EMP M ON E.MGR = M.EMPNO
+  4  WHERE M.JOB = 'MANAGER'
+  5  AND E.SAL BETWEEN 1000 AND 3000;
+
+EMPLOYEE_N MANAGER_NA                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+ALLEN      BLAKE                                                                                                                                                                                        
+WARD       BLAKE                                                                                                                                                                                        
+MARTIN     BLAKE                                                                                                                                                                                        
+SCOTT      JONES                                                                                                                                                                                        
+TURNER     BLAKE                                                                                                                                                                                        
+FORD       JONES                                                                                                                                                                                        
+MILLER     CLARK                                                                                                                                                                                        
+
+7 rows selected.
+
+SQL> --4
+SQL> --4 Query 4: Find the 7th and 8th Minimum Salary using Subquery
+SQL> 
+SQL> SELECT SAL
+  2  FROM EMP E1
+  3  WHERE 7 = (
+  4      SELECT COUNT(DISTINCT SAL)
+  5      FROM EMP E2
+  6      WHERE E2.SAL <= E1.SAL
+  7  )
+  8  UNION
+  9  SELECT SAL
+ 10  FROM EMP E1
+ 11  WHERE 8 = (
+ 12      SELECT COUNT(DISTINCT SAL)
+ 13      FROM EMP E2
+ 14      WHERE E2.SAL <= E1.SAL
+ 15  );
+
+       SAL                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      1600                                                                                                                                                                                              
+      2450                                                                                                                                                                                              
+
+SQL> --5
+SQL> --5 Query 5: Find the name of employees who earn salary more than JAMES and less than KING
+SQL> 
+SQL> SELECT ENAME, SAL
+  2  FROM EMP
+  3  WHERE SAL > (SELECT SAL FROM EMP WHERE ENAME = 'JAMES')
+  4  AND SAL < (SELECT SAL FROM EMP WHERE ENAME = 'KING');
+
+ENAME             SAL                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+ALLEN            1600                                                                                                                                                                                   
+WARD             1250                                                                                                                                                                                   
+JONES            2975                                                                                                                                                                                   
+MARTIN           1250                                                                                                                                                                                   
+BLAKE            2850                                                                                                                                                                                   
+CLARK            2450                                                                                                                                                                                   
+SCOTT            3000                                                                                                                                                                                   
+TURNER           1500                                                                                                                                                                                   
+ADAMS            1100                                                                                                                                                                                   
+FORD             3000                                                                                                                                                                                   
+MILLER           1300                                                                                                                                                                                   
+
+11 rows selected.
+
+SQL> --6 Query 6: Find the name of the employee who has the maximum length of characters in their name.
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE LENGTH(ENAME) = (SELECT MAX(LENGTH(ENAME)) FROM EMP);
+
+ENAME                                                                                                                                                                                                   
+----------                                                                                                                                                                                              
+MARTIN                                                                                                                                                                                                  
+TURNER                                                                                                                                                                                                  
+MILLER                                                                                                                                                                                                  
+
+SQL> --7 Query 7: Find all unique salaries from the EMP table
+SQL> SELECT DISTINCT SAL
+  2  FROM EMP
+  3  ORDER BY SAL;
+
+       SAL                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       800                                                                                                                                                                                              
+       950                                                                                                                                                                                              
+      1100                                                                                                                                                                                              
+      1250                                                                                                                                                                                              
+      1300                                                                                                                                                                                              
+      1500                                                                                                                                                                                              
+      1600                                                                                                                                                                                              
+      2450                                                                                                                                                                                              
+      2850                                                                                                                                                                                              
+      2975                                                                                                                                                                                              
+      3000                                                                                                                                                                                              
+      5000                                                                                                                                                                                              
+
+12 rows selected.
+
+SQL> --8 Query 8: Find the second highest salary from the EMP table
+SQL> SELECT MAX(SAL)
+  2  FROM EMP
+  3  WHERE SAL < (SELECT MAX(SAL) FROM EMP);
+
+  MAX(SAL)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      3000                                                                                                                                                                                              
+
+SQL> --9 Query 9: Find the third highest salary from the EMP table
+SQL> SELECT MAX(SAL)
+  2  FROM EMP
+  3  WHERE SAL < (
+  4      SELECT MAX(SAL)
+  5      FROM EMP
+  6      WHERE SAL < (SELECT MAX(SAL) FROM EMP)
+  7  );
+
+  MAX(SAL)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      2975                                                                                                                                                                                              
+
+SQL> --10 Query 10: Find all employees who earn more than the average salary of all employees
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE SAL > (SELECT AVG(SAL) FROM EMP);
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+
+6 rows selected.
+
+SQL> -- 11 Query 11: Find all employees who earn more than the average salary of their department
+SQL> SELECT *
+  2  FROM EMP E
+  3  WHERE SAL > (SELECT AVG(SAL)
+  4               FROM EMP
+  5               WHERE DEPTNO = E.DEPTNO);
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+
+6 rows selected.
+
+SQL> -- 12 Query 12: Display the department name and the number of employees in each department
+SQL> SELECT D.DNAME, COUNT(E.EMPNO) AS NUM_EMPLOYEES
+  2  FROM DEPT D
+  3  LEFT JOIN EMP E ON D.DEPTNO = E.DEPTNO
+  4  GROUP BY D.DNAME;
+
+DNAME          NUM_EMPLOYEES                                                                                                                                                                            
+-------------- -------------                                                                                                                                                                            
+ACCOUNTING                 3                                                                                                                                                                            
+OPERATIONS                 0                                                                                                                                                                            
+RESEARCH                   5                                                                                                                                                                            
+SALES                      6                                                                                                                                                                            
+
+SQL> -- Query 13: Display employee names and their salaries in descending order of salary
+SQL> SELECT ENAME, SAL
+  2  FROM EMP
+  3  ORDER BY SAL DESC;
+
+ENAME             SAL                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+KING             5000                                                                                                                                                                                   
+FORD             3000                                                                                                                                                                                   
+SCOTT            3000                                                                                                                                                                                   
+JONES            2975                                                                                                                                                                                   
+BLAKE            2850                                                                                                                                                                                   
+CLARK            2450                                                                                                                                                                                   
+ALLEN            1600                                                                                                                                                                                   
+TURNER           1500                                                                                                                                                                                   
+MILLER           1300                                                                                                                                                                                   
+WARD             1250                                                                                                                                                                                   
+MARTIN           1250                                                                                                                                                                                   
+ADAMS            1100                                                                                                                                                                                   
+JAMES             950                                                                                                                                                                                   
+SMITH             800                                                                                                                                                                                   
+
+14 rows selected.
+
+SQL> 
+SQL> --14
+SQL> -- WAQTD DNAME AND ENAME FOR THE EMP WORKING AS CLERK IN DEPT NO 10
+SQL> SELECT D.DNAME, E.ENAME
+  2  FROM EMP E
+  3  JOIN DEPT D ON E.DEPTNO = D.DEPTNO
+  4  WHERE E.JOB = 'CLERK' AND E.DEPTNO = 10;
+
+DNAME          ENAME                                                                                                                                                                                    
+-------------- ----------                                                                                                                                                                               
+ACCOUNTING     MILLER                                                                                                                                                                                   
+
+SQL> --15
+SQL> --WAQTD NAME OF THE EMPLOYEES WHO EARNS COMMISSION BUT NOT IN DEPT 10
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE COMM IS NOT NULL AND DEPTNO NOT IN(10);
+
+ENAME                                                                                                                                                                                                   
+----------                                                                                                                                                                                              
+ALLEN                                                                                                                                                                                                   
+WARD                                                                                                                                                                                                    
+MARTIN                                                                                                                                                                                                  
+TURNER                                                                                                                                                                                                  
+
+SQL> /*
+SQL> SELECT * FROM EMP;
+SQL> */
+SQL> 
+SQL> SPOOL OFF;

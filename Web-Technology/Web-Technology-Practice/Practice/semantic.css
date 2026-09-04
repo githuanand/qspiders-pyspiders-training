@@ -1,0 +1,13 @@
+header{
+    color:black;
+    font-size:16px;
+    margin:10px;
+    background-color: aqua;
+}
+
+footer{
+    color:blueviolet;
+    font-size:16px;
+    margin:10px;
+    background-color: aquamarine;
+}

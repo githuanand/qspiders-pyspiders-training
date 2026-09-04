@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anand Mohan Jha - Resume</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+      color: #222;
+    }
+    .container {
+      display: flex;
+      max-width: 1000px;
+      margin: 20px auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0px 4px 8px gray;
+      overflow: hidden;
+    }
+    .left-column {
+      width: 30%;
+      background-color: navy;
+      color: white;
+      padding: 25px;
+      text-align: center;
+    }
+    .right-column {
+      width: 70%;
+      padding: 30px;
+    }
+    h1 {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+    h2 {
+      color: navy;
+      margin-top: 20px;
+      font-size: 20px;
+    }
+    hr {
+      border: 0;
+      height: 1px;
+      background: lightgray;
+      margin: 15px 0;
+    }
+    ul {
+      padding-left: 20px;
+      margin: 5px 0;
+    }
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid white;
+      margin-bottom: 15px;
+      object-fit: cover;
+    }
+    .contact p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Left Column -->
+    <aside class="left-column">
+      <img src="https://via.placeholder.com/120" alt="Profile Photo" class="profile-pic">
+      <h1 id="name"></h1>
+      <p id="title"></p>
+      <p id="summary"></p>
+      <hr>
+      <section class="contact" id="contact"></section>
+    </aside>
+
+    <!-- Right Column -->
+    <main class="right-column" id="resume-content"></main>
+  </div>
+
+  <script>
+    // Resume Data (JSON)
+    const resumeData = {
+      name: "Anand Mohan Jha",
+      title: "Aspiring Software Developer",
+      summary: "Passionate about turning ideas into efficient, scalable, and impactful software solutions.",
+      contact: {
+        phone: "9339824377",
+        email: "aj1001194@gmail.com",
+        linkedin: "https://linkedin.com/in/anand-mohan-jha-55843924a",
+        github: "https://github.com/githuanand",
+        location: "Kolkata, West Bengal, India"
+      },
+      sections: [
+        {
+          title: "Career Objective",
+          content: "To work as a Python Developer where I can apply my skills in Python, Django, REST APIs, and databases, while continuously learning and contributing to organizational success."
+        },
+        {
+          title: "Education",
+          items: [
+            "B.Tech in Information Technology — MCKV Institute of Engineering (2021 - 2025) | CGPA: 7.81",
+            "Higher Secondary Education — Rishra Vidyapith (2018 - 2020) | 81.05%",
+            "Secondary Education — Hooghly Modern School, Bandel (2003 - 2018) | 77.85%"
+          ]
+        },
+        {
+          title: "Skills",
+          items: [
+            "Python, ANSI SQL",
+            "Django & Django Rest Framework",
+            "Web Technologies (HTML, CSS, JavaScript)",
+            "GitHub, Postman API",
+            "Agile Methodologies",
+            "Problem Solving & Communication"
+          ]
+        },
+        {
+          title: "Training & Internships",
+          items: [
+            "Python Full Stack Development with Data Analysis — Qspiders/Jspiders/Pyspiders (01/2025 - Present)",
+            "Virtual Data Science & AIML Internship — YBI Foundation (08/2024 - 09/2024)"
+          ]
+        },
+        {
+          title: "Projects",
+          items: [
+            "To-Do List App (Django) — CRUD operations, user authentication, SQLite, Django Admin",
+            "Django Weather App — Real-time weather updates (OpenWeatherMap API), SQLite backend"
+          ]
+        },
+        {
+          title: "Certificates",
+          items: [
+            "SQL Intermediate — HackerRank",
+            "Python Basics — HackerRank",
+            "Python Libraries for Machine Learning — Great Learning"
+          ]
+        },
+        {
+          title: "Organizations",
+          items: ["Sri Satya Sai Seva Organization — Student Volunteer"]
+        },
+        {
+          title: "Interests",
+          items: ["Machine Learning", "Data Science", "Artificial Intelligence", "Web Development"]
+        }
+      ]
+    };
+
+    // Fill Profile Info
+    document.getElementById("name").textContent = resumeData.name;
+    document.getElementById("title").textContent = resumeData.title;
+    document.getElementById("summary").textContent = resumeData.summary;
+
+    // Contact Section
+    document.getElementById("contact").innerHTML = `
+      <h2>Contact</h2>
+      <p>📞 ${resumeData.contact.phone}</p>
+      <p>✉️ ${resumeData.contact.email}</p>
+      <p>🔗 <a href="${resumeData.contact.linkedin}" target="_blank" style="color:white;">LinkedIn</a></p>
+      <p>🔗 <a href="${resumeData.contact.github}" target="_blank" style="color:white;">GitHub</a></p>
+      <p>📍 ${resumeData.contact.location}</p>
+    `;
+
+    // Dynamic Sections
+    const resumeContent = document.getElementById("resume-content");
+    resumeData.sections.forEach(section => {
+      const sectionEl = document.createElement("section");
+      sectionEl.innerHTML = `<h2>${section.title}</h2>`;
+      
+      if (section.content) {
+        const p = document.createElement("p");
+        p.textContent = section.content;
+        sectionEl.appendChild(p);
+      }
+
+      if (section.items) {
+        const ul = document.createElement("ul");
+        section.items.forEach(item => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          ul.appendChild(li);
+        });
+        sectionEl.appendChild(ul);
+      }
+
+      resumeContent.appendChild(sectionEl);
+      resumeContent.appendChild(document.createElement("hr"));
+    });
+  </script>
+</body>
+</html>

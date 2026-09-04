@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Selectors Example</title>
+    <style>
+        /* 1. Universal Selector () */
+
+        * {
+            color: blueviolet; /* base color */
+        }
+
+        /* 2. Tag Selector */
+
+        main {
+            color: blue;
+        }
+
+        /* 3. Grouping Selector */
+
+        p, figure, section, span {
+            color: brown;
+        }
+
+        /* 4. Class Selector */
+
+        .as {
+            color: aquamarine;
+        }
+
+        /* 5. ID Selector () */
+
+        #abc {
+            color: red;
+        }
+
+    </style>
+ 
+</head>
+
+<body>
+    <!-- By using id(#) -->
+    <h1 id="abc">I am the h1 element</h1>
+
+    <!-- By using class(.) -->
+    <h2 class="as">I am the h2 element</h2>
+    <h3 class="as">I am the h3 element</h3>
+    <h4 class="as">I am the h4 element</h4>
+    <div class="as">I am the div element</div>
+
+    <!-- By using the grouping selector(,) -->
+    <p>I am the p element</p>
+    <section>Section color</section>
+    <figure>Figure part</figure>
+    <span>This is span part</span>
+
+    <!-- By using the TagName -->
+    <main>Lorem ipsum dolor sit amet consectetur.</main>
+</body>
+</html>
